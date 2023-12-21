@@ -45,11 +45,14 @@
 
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-light my-2 my-sm-0" type="submit"><i class="fa-solid fa-gear me-2"></i>My
-                            Account</button>
-                        <button class="btn btn-light my-2 my-sm-0" type="submit"><i
+                    <!-- on if user is logined -->
+                    <a  href="account.jsp">
+                        <button class="btn btn-light my-2 my-sm-0" type="button"><i class="fa-solid fa-gear me-2"></i>My
+                            Account</button></a>
+                    <a  href="help.jsp">
+                        <button class="btn btn-light my-2 my-sm-0" type="button"><i
                                 class="fa-solid fa-headset me-2"></i>Contact Us</button>
-
+					</a>
                     </form>
 
                 </div>
