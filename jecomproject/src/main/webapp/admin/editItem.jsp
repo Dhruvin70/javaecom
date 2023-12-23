@@ -1,3 +1,4 @@
+<%@page import="com.entity.Items"%>
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.DAL.ItemsImplement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -73,7 +74,7 @@
 							<%
 							
 								ItemsImplement connection = new ItemsImplement(DBConnect.getConn());
-								
+								Items item = new Items();
 							
 							%>
 
