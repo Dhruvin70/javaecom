@@ -1,9 +1,11 @@
 package com.entity;
 
+import org.hibernate.cfg.Configuration;
+
 public class Items {
-	private double price;
-	private String name,product,product_code,status,itemimg;
-	public Items(double price, String name, String product, String product_code, String status, String itemimg) {
+	
+	private String name,product,product_code,status,itemimg,price;
+	public Items(String price, String name, String product, String product_code, String status, String itemimg) {
 		super();
 		this.price = price;
 		this.name = name;
@@ -15,16 +17,22 @@ public class Items {
 
 	
 	
+	public Items() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	/**
 	 * @return the price
 	 */
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	/**
@@ -93,5 +101,7 @@ public class Items {
 		return "Items [price=" + price + ", name=" + name + ", product=" + product + ", product_code=" + product_code
 				+ ", status=" + status + ", itemimg=" + itemimg + "]";
 	}
+	
+	
 
 }

@@ -1,5 +1,10 @@
 package com.entity;
 
+import org.hibernate.cfg.Configuration;
+
+import com.mysql.cj.Session;
+import com.mysql.cj.xdevapi.SessionFactory;
+
 public class User {
     private int id;
     private long phone;
@@ -95,4 +100,6 @@ public class User {
            
                 '}';
     }
+    
+    
 }

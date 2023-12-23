@@ -1,5 +1,9 @@
+<%@page import="com.entity.Items"%>
+<%@page import="java.util.List"%>
+<%@page import="com.DB.DBConnect"%>
+<%@page import="com.DAL.ItemsImplement"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 
 
 <!DOCTYPE html>
@@ -98,7 +102,7 @@
 				<!--//app-branding-->
 				<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 					<ul class="app-menu list-unstyled accordion" id="menu-accordion">
-				
+
 						<li class="nav-item">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ --> <a
 							class="nav-link" href="adminhome.jsp"> <span class="nav-icon">
@@ -114,17 +118,17 @@
 						</a> <!--//nav-link-->
 						</li>
 						<!--//nav-item-->
-						
+
 						<!--//nav-item-->
-						
-						
-						
-						
-						
-						
-						
-						
-						
+
+
+
+
+
+
+
+
+
 						<li class="nav-item has-submenu">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ --> <a
 							class="nav-link submenu-toggle" href="#"
@@ -157,10 +161,10 @@
 
 									<li class="submenu-item"><a class="submenu-link"
 										href="all_items.jsp">All Items</a></li>
-										
+
 								</ul>
 							</div>
-						</li>													
+						</li>
 						<li class="nav-item has-submenu">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 
@@ -242,8 +246,9 @@
 						role="tab" aria-controls="orders-all" aria-selected="true">All</a>
 					<a class="flex-sm-fill text-sm-center nav-link"
 						id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid"
-						role="tab" aria-controls="orders-paid" aria-selected="false">All Orders</a>
-			<!-- 		<a class="flex-sm-fill text-sm-center nav-link"
+						role="tab" aria-controls="orders-paid" aria-selected="false">All
+						Orders</a>
+					<!-- 		<a class="flex-sm-fill text-sm-center nav-link"
 						id="orders-pending-tab" data-bs-toggle="tab"
 						href="#orders-pending" role="tab" aria-controls="orders-pending"
 						aria-selected="false">Pending</a> <a
@@ -267,73 +272,52 @@
 												<th class="cell">Name</th>
 												<th class="cell">Product</th>
 												<th class="cell">Product Code</th>
-												<th class="cell">Price in  USD</th>
+												<th class="cell">Price in USD</th>
 												<th class="cell">Status</th>
 												<th class="cell">Action</th>
-												
+
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="cell">ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB</td>
-												<td class="cell"><span class="truncate"><img alt="" src="../images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg" style="width: 100px"></span></td>
-												<td class="cell">CLP3-E9457</td>
-												<td class="cell"><span>5</span><!--  <span> class="note">2:16
-														PM</span>--></td>
-												<td class="cell"><span class="badge bg-success">Active</span></td>
-												<td class="cell">
-												
-												<a href="#" class="btn btn-sm btn-primary">Edit</a>
-												<a href="#" class="btn btn-sm btn-danger">Delete</a>
-												</td>
-												
-											</tr>
-											
-											<tr>
-												<td class="cell">ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB</td>
-												<td class="cell"><span class="truncate"><img alt="" src="../images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg" style="width: 100px"></span></td>
-												<td class="cell">CLP3-E9457</td>
-												<td class="cell"><span>5</span><!--  <span> class="note">2:16
-														PM</span>--></td>
-												<td class="cell"><span class="badge bg-success">Active</span></td>
-												<td class="cell">
-												
-												<a href="#" class="btn btn-sm btn-primary">Edit</a>
-												<a href="#" class="btn btn-sm btn-danger">Delete</a>
-												</td>
-												
-											</tr>
-											<tr>
-												<td class="cell">ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB</td>
-												<td class="cell"><span class="truncate"><img alt="" src="../images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg" style="width: 100px"></span></td>
-												<td class="cell">CLP3-E9457</td>
-												<td class="cell"><span>5</span><!--  <span> class="note">2:16
-														PM</span>--></td>
-												<td class="cell"><span class="badge bg-success">Active</span></td>
-												<td class="cell">
-												
-												<a href="#" class="btn btn-sm btn-primary">Edit</a>
-												<a href="#" class="btn btn-sm btn-danger">Delete</a>
-												</td>
-												
-											</tr>
-											<tr>
-												<td class="cell">ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB</td>
-												<td class="cell"><span class="truncate"><img alt="" src="../images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg" style="width: 100px"></span></td>
-												<td class="cell">CLP3-E9457</td>
-												<td class="cell"><span>5</span><!--  <span> class="note">2:16
-														PM</span>--></td>
-												<td class="cell"><span class="badge bg-success">Active</span></td>
-												<td class="cell">
-												
-												<a href="#" class="btn btn-sm btn-primary">Edit</a>
-												<a href="#" class="btn btn-sm btn-danger">Delete</a>
-												</td>
-												
-											</tr>
-											
+
+											<%
 										
-											
+										ItemsImplement itemImplement = new ItemsImplement(DBConnect.getConn());
+										List<Items> list = itemImplement.getAllItems();
+										for(Items item: list){
+										
+										%>
+
+											<tr>
+												<td class="cell"><%= item.getName()%></td>
+												<td class="cell"><span class="truncate"><img
+														alt="" src="../items/<%= item.getItemimg()%>"
+														style="width: 100px; height: 100px"></span></td>
+												<td class="cell"><%= item.getProduct_code() %></td>
+												<td class="cell"><span><%=item.getPrice() %></span> <!--  <span> class="note">2:16
+														PM</span>--></td>
+												<td class="cell">
+												
+												<%
+												if ("Active".equals(item.getStatus())){
+												%>
+													<span class="badge bg-success">Active</span> 
+												<%
+												}else{
+												%>	
+												<span class="badge bg-danger">Inactive</span> 
+												<%
+												}
+												%>
+												</td>
+												<td class="cell"><a href="editItem.jsp?code=<%=item.getProduct_code() %>"
+													class="btn btn-sm btn-primary">Edit</a> <a href="deleteItem.jsp"
+													class="btn btn-sm btn-danger">Delete</a></td>
+
+											</tr>
+											<%} %>
+
+
 
 										</tbody>
 									</table>
@@ -422,10 +406,10 @@
 												<td class="cell"><a class="btn-sm app-btn-secondary"
 													href="#">View</a></td>
 											</tr>
-											
-											
 
-											
+
+
+
 										</tbody>
 									</table>
 								</div>
@@ -529,17 +513,7 @@
 		</div>
 		<!--//app-content-->
 
-		<footer class="app-footer">
-			<div class="container text-center py-3">
-				<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-				<small class="copyright">Designed with <span class="sr-only">love</span><i
-					class="fas fa-heart" style="color: #fb866a;"></i> by <a
-					class="app-link" href="http://themes.3rdwavemedia.com"
-					target="_blank">Xiaoying Riley</a> for developers
-				</small>
-
-			</div>
-		</footer>
+		
 		<!--//app-footer-->
 
 	</div>
