@@ -590,9 +590,21 @@
 												name="repassword" /> <label class="form-label ps-2"
 												for="form3Example4cdg">Repeat your password</label>
 										</div>
+										<%
+										String message = (String) request.getAttribute("message");
+										String successMessage = (String) request.getAttribute("successMessage");
 
-										<p class="form-outline ms-2" style="color: red;">${message}</p>
-										<p class="form-outline ms-2" style="color: green;">${successMessage}</p>
+										if (message != null) {
+										%>
+										<p class="form-outline ms-2" style="color: red;"><%=message%></p>
+										
+										<%
+										} else if (successMessage != null) {
+										%>
+										<p class="form-outline ms-2" style="color: green;"><%=successMessage%></p>
+										<%
+										}
+										%>
 
 										<div class="row">
 											<div

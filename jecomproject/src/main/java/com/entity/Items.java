@@ -1,10 +1,16 @@
 package com.entity;
 
-import org.hibernate.cfg.Configuration;
-
 public class Items {
 	
 	private String name,product,product_code,status,itemimg,price;
+	
+	
+	
+	public Items() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Items(String price, String name, String product, String product_code, String status, String itemimg) {
 		super();
 		this.price = price;
@@ -14,13 +20,6 @@ public class Items {
 		this.status = status;
 		this.itemimg = itemimg;
 	}
-
-	
-	
-	public Items() {
-		// TODO Auto-generated constructor stub
-	}
-
 
 
 	/**

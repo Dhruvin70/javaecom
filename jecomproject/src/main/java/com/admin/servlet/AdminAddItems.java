@@ -1,9 +1,11 @@
 package com.admin.servlet;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;import java.nio.file.FileAlreadyExistsException;
+import java.net.http.HttpResponse;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
 
 import com.DAL.ItemsImplement;
@@ -24,7 +26,7 @@ import jakarta.servlet.http.Part;
 public class AdminAddItems extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		try {
 
 			String name = req.getParameter("name");
@@ -34,63 +36,53 @@ public class AdminAddItems extends HttpServlet {
 			String itemStatus = req.getParameter("itemStatus");
 			Part itemimg = req.getPart("itemimg");
 			String imgFileName = itemimg.getSubmittedFileName();
-			
+
 			HttpSession session = req.getSession();
-			
-			
+
 			
 
-			Items item = new Items(price, name, product, product_code, itemStatus, imgFileName);
-			
-			
-			
+
+			ItemsImplement ii = new ItemsImplement(DBConnect.getConn());
+			Items item = new Items();
+			item.setItemimg(imgFileName);
+			item.setName(name);
+			item.setProduct(product);
+			item.setPrice(price);
+			item.setProduct_code(product_code);
+			item.setStatus(itemStatus);
 			
 			System.out.println(item);
-			
-			
-			ItemsImplement ii = new ItemsImplement(DBConnect.getConn());
-			
+
+
 			boolean implemented = ii.itemInsertion(item);
-			
-			
-			
-			if(implemented) {
-				
-				
-				String path = getServletContext().getRealPath("")+"items";
-				
+
+			if (implemented) {
+
+				String path = getServletContext().getRealPath("") + "items";
+
 				File file = new File(path);
-				
+
 				System.out.println(file);
-				
-				itemimg.write(path + File.separator + imgFileName );
-				
-				
-				
+
+				itemimg.write(path + File.separator + imgFileName);
+
 				String successMsg = "Item Added Successfully.\n" + item;
 				session.setAttribute("smessage", successMsg);
 //				req.getRequestDispatcher("admin/add_item.jsp").forward(req, res);
 				res.sendRedirect("admin/add_item.jsp");
-			}else {
+				return;
+			} else {
 				String failureMsg = "Unable to add item something went wrong";
 				session.setAttribute("fmessage", failureMsg);
 //				req.getRequestDispatcher("admin/add_item.jsp").forward(req, res);
 				res.sendRedirect("admin/add_item.jsp");
+				return;
 			}
-			
-		
-			
-			
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
 
 }

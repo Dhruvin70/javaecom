@@ -6,6 +6,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,14 +121,6 @@
 						<!--//nav-item-->
 
 						<!--//nav-item-->
-
-
-
-
-
-
-
-
 
 						<li class="nav-item has-submenu">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ --> <a
@@ -278,44 +271,49 @@
 
 											</tr>
 										</thead>
+										<c:if test="${not empty smessage}">
+											<p class="text-center text-success">${smessage}</p>
+											<c:remove var="smessage" scope="session" />
+										</c:if>
+
+										<c:if test="${not empty fmessage}">
+											<p class="text-center text-danger">${fmessage}</p>
+											<c:remove var="fmessage" scope="session" />
+										</c:if>
 										<tbody>
 
 											<%
-										
-										ItemsImplement itemImplement = new ItemsImplement(DBConnect.getConn());
-										List<Items> list = itemImplement.getAllItems();
-										for(Items item: list){
-										
-										%>
+											ItemsImplement itemImplement = new ItemsImplement(DBConnect.getConn());
+											List<Items> list = itemImplement.getAllItems();
+											for (Items item : list) {
+											%>
 
 											<tr>
-												<td class="cell"><%= item.getName()%></td>
+												<td class="cell"><%=item.getName()%></td>
 												<td class="cell"><span class="truncate"><img
-														alt="" src="../items/<%= item.getItemimg()%>"
+														alt="" src="../items/<%=item.getItemimg()%>"
 														style="width: 100px; height: 100px"></span></td>
-												<td class="cell"><%= item.getProduct_code() %></td>
-												<td class="cell"><span><%=item.getPrice() %></span> <!--  <span> class="note">2:16
+												<td class="cell"><%=item.getProduct_code()%></td>
+												<td class="cell"><span><%=item.getPrice()%></span> <!--  <span> class="note">2:16
 														PM</span>--></td>
 												<td class="cell">
-												
-												<%
-												if ("Active".equals(item.getStatus())){
-												%>
-													<span class="badge bg-success">Active</span> 
-												<%
-												}else{
-												%>	
-												<span class="badge bg-danger">Inactive</span> 
-												<%
-												}
-												%>
+													<%
+													if ("Active".equals(item.getStatus())) {
+													%> <span class="badge bg-success">Active</span> <%
+ } else {
+ %> <span class="badge bg-danger">Inactive</span> <%
+ }
+ %>
 												</td>
-												<td class="cell"><a href="editItem.jsp?code=<%=item.getProduct_code() %>"
-													class="btn btn-sm btn-primary">Edit</a> <a href="deleteItem.jsp"
-													class="btn btn-sm btn-danger">Delete</a></td>
+												<td class="cell"><a
+													href="editItem.jsp?code=<%=item.getProduct_code()%>"
+													class="btn btn-sm btn-primary">Edit</a> <a
+													href="deleteItem.jsp" class="btn btn-sm btn-danger">Delete</a></td>
 
 											</tr>
-											<%} %>
+											<%
+											}
+											%>
 
 
 
@@ -513,7 +511,7 @@
 		</div>
 		<!--//app-content-->
 
-		
+
 		<!--//app-footer-->
 
 	</div>

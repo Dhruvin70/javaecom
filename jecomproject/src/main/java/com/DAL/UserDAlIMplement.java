@@ -2,6 +2,7 @@ package com.DAL;
 
 import com.entity.User;
 
+
 import com.user.servlet.UserLogin;
 
 import java.sql.Connection;
@@ -93,7 +94,6 @@ public class UserDAlIMplement implements UserDAL {
 			ps.setString(2, password);
 
 			ResultSet userDetailSet = ps.executeQuery();
-			
 
 			if (userDetailSet.next()) {
 
@@ -118,18 +118,20 @@ public class UserDAlIMplement implements UserDAL {
 		}
 		return logined;
 	}
-	 public static boolean isStrongPassword(String password) {
-	        // Define a regular expression for password strength
-	        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
-	        // Compile the regular expression
-	        Pattern pattern = Pattern.compile(regex);
+	public static  boolean isStrongPassword(String password) {
+		// Define a regular expression for password strength
+		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
-	        // Match the password against the pattern
-	        Matcher matcher = pattern.matcher(password);
+		// Compile the regular expression
+		Pattern pattern = Pattern.compile(regex);
 
-	        // Return true if the password matches the pattern (strong password), otherwise false
-	        return matcher.matches();
-	    }
+		// Match the password against the pattern
+		Matcher matcher = pattern.matcher(password);
+
+		// Return true if the password matches the pattern (strong password), otherwise
+		// false
+		return matcher.matches();
+	}
 
 }

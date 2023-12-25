@@ -2,7 +2,7 @@
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.DAL.ItemsImplement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,28 +24,26 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center">Edit Item by Code</h4>
-						<c:if test="${not empty smessage}">
-								<p class="text-center text-success">${smessage}</p>
-								<c:remove var="smessage" scope="session" />
-							</c:if>
 
-							<c:if test="${not empty fmessage}">
-								<p class="text-center text-danger">${fmessage}</p>
-								<c:remove var="fmessage" scope="session" />
-							</c:if>
-							
-							
-							
-							
-						<form action="../adminAddItems" method="post"
+
+						<%
+						String code = request.getParameter("code");
+						ItemsImplement dao = new ItemsImplement(DBConnect.getConn());
+						Items i = dao.getItemsByCode(code);
+						%>
+
+
+
+						<form action="../editItem" method="post"
 							enctype="multipart/form-data">
-							
+
 
 
 							<div class="form-group">
 
 								<label for="inputState">Name</label><input name="name"
-									type="text" class="form-control" id="inputsection" required>
+									type="text" class="form-control" id="inputsection"
+									value="<%=i.getName()%>">
 
 							</div>
 
@@ -53,7 +51,8 @@
 							<div class="form-group">
 
 								<label for="inputState">Product</label><input name="product"
-									type="text" class="form-control" id="inputsection" required>
+									type="text" class="form-control" id="inputsection"
+									value="<%=i.getProduct()%>">
 
 							</div>
 
@@ -61,50 +60,49 @@
 
 								<label for="inputState">Product Code</label><input
 									name="product_code" type="text" class="form-control"
-									id="inputsection" required>
+									id="inputsection" value="<%=i.getProduct_code()%>">
 
 							</div>
 							<div class="form-group">
 
 								<label for="inputState">Price</label><input name="price"
-									type="text" class="form-control" id="inputsection" required>
+									type="text" class="form-control" id="inputsection"
+									value="<%=i.getPrice()%>">
 
 							</div>
 							<div class="form-group">
-							<%
-							
-								ItemsImplement connection = new ItemsImplement(DBConnect.getConn());
-								Items item = new Items();
-							
-							%>
 
 								<label for="inputState">Status</label><select id="status"
 									name="itemStatus" class="form-control">
-									
-												<%
-												if ("Active".equals(item.getStatus())){
-												%>
-													<span class="badge bg-success">Active</span> 
-												<%
-												}else{
-												%>	
-												<span class="badge bg-danger">Inactive</span> 
-												<%
-												}
-												%>
 
-									<option selected value="Active" style="color: green">Active</option>
+									<%
+									if ("Active".equals(i.getStatus())) {
+									%>
+									<option value="Active" style="color: green" selected>Active</option>
 									<option value="Inactive" style="color: red">Inactive</option>
+									<%
+									} else {
+									%>
+									<option value="Inactive" style="color: red" selected>Inactive</option>
+									<option value="Active" style="color: green">Active</option>
+
+									<%
+									}
+									%>	
+
+
 								</select>
 
 							</div>
+							
 							<div class="form-group">
 
-								<label for="inputState">Item</label><input name="itemimg"
-									type="file" class="form-control" id="inputsection" required>
+								<label for="inputState">Item</label>
+								<p name="itemimg" class="form-control" id="inputsection"><%=i.getItemimg()%></p>
 
 							</div>
-							<button type="submit" class="btn btn-primary mt-3">Add</button>
+
+							<button type="submit" class="btn btn-primary mt-3">Update</button>
 
 						</form>
 					</div>

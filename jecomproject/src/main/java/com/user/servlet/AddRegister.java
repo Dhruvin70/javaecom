@@ -29,6 +29,16 @@ public class AddRegister extends HttpServlet {
             String address = req.getParameter("address");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+            
+            if(UserDAlIMplement.isStrongPassword(password)) {
+            	String pmessage = "Passwords not strong";
+                req.setAttribute("message", pmessage);
+                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                return;
+            }
+            
+           
+            
             String hashedpassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
            
 
@@ -45,6 +55,12 @@ public class AddRegister extends HttpServlet {
 
             // Data connection object
             UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
+            if(DBConnect.getConn()==null) {
+            	String message = "Connection error";
+                req.setAttribute("message", message);
+                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                return;
+            }
 
             if (dal.isUserExists(email)) {
                 String message = "Account with this email already registered";
@@ -58,6 +74,7 @@ public class AddRegister extends HttpServlet {
                 String message = "Passwords do not match";
                 req.setAttribute("message", message);
                 req.getRequestDispatcher("/register.jsp").forward(req, res);
+                
                 return;
             }
 
@@ -81,15 +98,14 @@ public class AddRegister extends HttpServlet {
                 req.setAttribute("successMessage", successMessage);
 
                 // Forward to register.jsp to display the success message
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
+//                req.getRequestDispatcher("/register.jsp").forward(req, res);
 
-                // Use JavaScript to redirect to login.jsp after 2 seconds
-                res.getWriter().println("<script>setTimeout(function(){window.location.href='/login.jsp';},2000);</script>");
-            } else {
+                }
+            	else {
                 // Registration failed, set failure message
                 String message = "Registration failed. Please try again.";
                 req.setAttribute("message", message);
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
+//                req.getRequestDispatcher("/register.jsp").forward(req, res);
                 return;
             }
 

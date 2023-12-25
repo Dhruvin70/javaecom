@@ -11,4 +11,5 @@ public interface ItemsDAO {
 	
 	public Items getItemsByCode(String code);
 
+	public boolean updateByCode(Items code);
 }
