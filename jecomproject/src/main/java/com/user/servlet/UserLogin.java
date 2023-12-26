@@ -34,7 +34,8 @@ public class UserLogin extends HttpServlet {
 
 				if (email.equals("admin437@gmail.com") && password.equals("123456789")) {
 					User us = new User();
-//				req.setAttribute("userObj", us);
+					us.setFirst("Admin");
+					req.setAttribute("userObj", us);
 					res.sendRedirect("admin/adminhome.jsp");
 				}
 
