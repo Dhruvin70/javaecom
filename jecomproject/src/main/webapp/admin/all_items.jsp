@@ -10,9 +10,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Portal - Bootstrap 5 Admin Dashboard Template For
-	Developers</title>
-
+<title>All Products</title>
+<script
+	src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.all.min.js
+"></script>
+<link
+	href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
+"
+	rel="stylesheet">
 <!-- Meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +36,59 @@
 <!-- App CSS -->
 <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
 
+<!-- Dialogbox JS-->
+
+<!-- 
+<script>
+    function showConfirmation(itemId) {
+        // Use SweetAlert to display a confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user clicks 'Yes', call the delete function
+                deleteFunction(itemId);
+            } else {
+                // If user clicks 'No', you can handle it here
+                Swal.fire('Cancelled', 'Your operation is safe :)', 'info');
+            }
+        });
+    }
+
+    function deleteFunction(itemId) {
+        // Use the Fetch API to make an AJAX request
+        fetch('http://localhost:8080/jecomproject/deleteItem?id=' + itemId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers as needed
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the response from the server
+            Swal.fire('Deleted!', data.message, 'success');
+            // Reload the page after deletion
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error, display an error message, etc.
+        });
+    }
+</script>
+-->
 </head>
 
 <body class="app">
@@ -271,14 +331,17 @@
 
 											</tr>
 										</thead>
-										<c:if test="${not empty smessage}">
-											<p class="text-center text-success">${smessage}</p>
-											<c:remove var="smessage" scope="session" />
+										<c:if test="${not empty deletionsmessage}">
+											<p class=" text-sm-center text-success pt-3 pb-3"
+												style="border: solid grey; border-width: 2px 2px 2px 2px;"
+												data-bs-toggle="tab">${deletionsmessage}</p>
+											<c:remove var="deletionsmessage" scope="session" />
 										</c:if>
 
-										<c:if test="${not empty fmessage}">
-											<p class="text-center text-danger">${fmessage}</p>
-											<c:remove var="fmessage" scope="session" />
+
+										<c:if test="${not empty deletionfmessage}">
+											<p class=" text-sm-center text-danger">${deletionfmessage}</p>
+											<c:remove var="deletionfmessage" scope="session" />
 										</c:if>
 										<tbody>
 
@@ -289,6 +352,8 @@
 											%>
 
 											<tr>
+												<td class="cell" id="routeId_<%=item.getId()%>" hidden value="<%=item.getId()%>"><%=item.getId()%></td>
+
 												<td class="cell"><%=item.getName()%></td>
 												<td class="cell"><span class="truncate"><img
 														alt="" src="../items/<%=item.getItemimg()%>"
@@ -299,24 +364,23 @@
 												<td class="cell">
 													<%
 													if ("Active".equals(item.getStatus())) {
-													%> <span class="badge bg-success">Active</span> <%
+													%> <span class="badge bg-success p-1 ps-2 pe-2" style=" font-size: 14px;">Active</span> <%
  } else {
- %> <span class="badge bg-danger">Inactive</span> <%
+ %> <span class="badge bg-danger p-1 ps-2 pe-2 " style=" font-size: 14px;">Inactive</span> <%
  }
  %>
 												</td>
 												<td class="cell"><a
-													href="editItem.jsp?code=<%=item.getProduct_code()%>"
-													class="btn btn-sm btn-primary">Edit</a> <a
-													href="deleteItem.jsp" class="btn btn-sm btn-danger">Delete</a></td>
+													href="editItem.jsp?id=<%=item.getId()%>"
+													class="btn btn-sm btn-primary p-1 ps-2 pe-2"><i class="fas fa-edit me-1"></i>Edit</a> 
+													
+													 <a href="../deleteItem?id=<%=item.getId()%>" class="btn btn-sm btn-danger  p-1 ps-2 pe-2" ><i class="fas fa-trash-alt me-1"></i>Delete</a>
+													 <!-- onclick="showConfirmation('<%=item.getId()%>')"-->
+													</td>
+</td>
 
 											</tr>
-											<%
-											}
-											%>
-
-
-
+											<%}%>
 										</tbody>
 									</table>
 								</div>
@@ -525,7 +589,6 @@
 
 	<!-- Page Specific JS -->
 	<script src="../assets/js/app.js"></script>
-
 </body>
 </html>
 

@@ -9,7 +9,9 @@ public interface ItemsDAO {
 	
 	public List<Items> getAllItems();
 	
-	public Items getItemsByCode(String code);
+	public Items getItemsById(int id);
 
-	public boolean updateByCode(Items code);
+	public boolean updateById(Items code);
+	
+	public boolean deleteById(int id);
 }

@@ -3,6 +3,7 @@ package com.entity;
 public class Items {
 	
 	private String name,product,product_code,status,itemimg,price;
+	private int id;
 	
 	
 	
@@ -11,8 +12,9 @@ public class Items {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Items(String price, String name, String product, String product_code, String status, String itemimg) {
+	public Items(String price, String name, String product, String product_code, String status, String itemimg,int id) {
 		super();
+		this.id = id;
 		this.price = price;
 		this.name = name;
 		this.product = product;
@@ -21,6 +23,14 @@ public class Items {
 		this.itemimg = itemimg;
 	}
 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the price

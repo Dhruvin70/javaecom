@@ -27,16 +27,23 @@
 
 
 						<%
-						String code = request.getParameter("code");
+						int id = Integer.parseInt(request.getParameter("id"));
+						System.out.println(request.getParameter("id"));
 						ItemsImplement dao = new ItemsImplement(DBConnect.getConn());
-						Items i = dao.getItemsByCode(code);
+						Items i = dao.getItemsById(id);
 						%>
 
 
 
-						<form action="../editItem" method="post"
-							enctype="multipart/form-data">
+						<form action="../editItem" method="post">
+							<div class="form-group" hidden>
 
+								<label for="inputState">Id</label><input name="id"
+									type="text" class="form-control" id="inputsection"
+									value="<%=i.getId()%>">
+
+							</div>
+							
 
 
 							<div class="form-group">
@@ -73,7 +80,7 @@
 							<div class="form-group">
 
 								<label for="inputState">Status</label><select id="status"
-									name="itemStatus" class="form-control">
+									name="status" class="form-control">
 
 									<%
 									if ("Active".equals(i.getStatus())) {

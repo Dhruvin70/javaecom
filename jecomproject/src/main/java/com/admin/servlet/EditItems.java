@@ -18,38 +18,38 @@ import jakarta.servlet.http.Part;
 @WebServlet(name = "EditItems", urlPatterns = { "/editItem" })
 public class EditItems extends HttpServlet {
 
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		try {
-
+			
+			int id = Integer.parseInt(req.getParameter("id"));
+			System.out.println(id);
 			String name = req.getParameter("name");
 			String product = req.getParameter("product");
 			String product_code = req.getParameter("product_code");
 			String price = req.getParameter("price");
-			String itemStatus = req.getParameter("itemStatus");
-			/*
-			 * Part itemimg = req.getPart("itemimg"); String imgFileName =
-			 * itemimg.getSubmittedFileName();
-			 */
-			
-			Items updateItems = new Items();
-			updateItems.setName(name);
-			updateItems.setPrice(price);
-			updateItems.setProduct(product);
-			updateItems.setProduct_code(product_code);
-			updateItems.setStatus(itemStatus);
-			
+			String itemStatus = req.getParameter("status");
+//			String itmimg = req.getParameter("itemimg");
+
+			Items i = new Items();
+			i.setId(id);
+			i.setName(name);
+			i.setPrice(price);
+			i.setProduct(product);
+			i.setProduct_code(product_code);
+			i.setStatus(itemStatus);
+//			i.setItemimg(itmimg);
+	
 			ItemsImplement dao = new ItemsImplement(DBConnect.getConn());
-			
-			boolean updatebycodeFunc = dao.updateByCode(updateItems);
+
+			boolean updatebyidFunc = dao.updateById(i);
 			HttpSession session = req.getSession();
-			if (updatebycodeFunc) {
+			if (updatebyidFunc) {
 				String message = "Item updated Successfully";
 				session.setAttribute("smessage", message);
 				res.sendRedirect("admin/all_items.jsp");
-				
+
 			} else {
 				String message = "Item update Failed";
 				session.setAttribute("fmessage", message);
@@ -58,12 +58,9 @@ public class EditItems extends HttpServlet {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 
-		// TODO Auto-generated method stub
-		super.doPost(req, res);
 	}
-
-	
 
 }
