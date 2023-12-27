@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <element>
-<web-app id="WebApp_ID" version="6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" >
+<web-app id="WebApp_ID" version="6.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
  
+ 
+  
   <taglib>
-        <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
-        <taglib-location>/WEB-INF/lib/jstl.jar</taglib-location>
-    </taglib>
- 
+    <taglib-uri>http://xmlns.jcp.org/jsp/jstl/core</taglib-uri>
+    <taglib-location>/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar</taglib-location>
+</taglib>
+  
+  
+
  
   <servlet>
         <servlet-name>userRegister</servlet-name>
@@ -46,6 +52,16 @@
     <servlet-mapping>
         <servlet-name>EditItems</servlet-name>
         <url-pattern>/editItem</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.user.servlet.Logout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     
  

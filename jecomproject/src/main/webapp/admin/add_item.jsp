@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,15 +23,17 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center">Add Items</h4>
-						<c:if test="${not empty smessage}">
-								<p class="text-center text-success">${smessage}</p>
-								<c:remove var="smessage" scope="session" />
-							</c:if>
+						<%-- Check for success message --%>
+                        <% if (session.getAttribute("smessage") != null) { %>
+                            <p class="text-center text-success"><%= session.getAttribute("smessage") %></p>
+                            <% session.removeAttribute("smessage"); %>
+                        <% } %>
 
-							<c:if test="${not empty fmessage}">
-								<p class="text-center text-danger">${fmessage}</p>
-								<c:remove var="fmessage" scope="session" />
-							</c:if>
+                        <%-- Check for failure message --%>
+                        <% if (session.getAttribute("fmessage") != null) { %>
+                            <p class="text-center text-danger"><%= session.getAttribute("fmessage") %></p>
+                            <% session.removeAttribute("fmessage"); %>
+                        <% } %>
 						<form action="../adminAddItems" method="post"
 							enctype="multipart/form-data">
 							
@@ -81,6 +84,7 @@
 
 							</div>
 							<button type="submit" class="btn btn-primary mt-3">Add</button>
+							<a href="all_items.jsp" class="btn btn-primary mt-3">Back to All Items</a>
 
 						</form>
 					</div>

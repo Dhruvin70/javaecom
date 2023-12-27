@@ -38,7 +38,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 
 <!-- Dialogbox JS-->
 
-<!-- 
+
 <script>
     function showConfirmation(itemId) {
         // Use SweetAlert to display a confirmation dialog
@@ -88,7 +88,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
         });
     }
 </script>
--->
+
 </head>
 
 <body class="app">
@@ -331,18 +331,40 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 
 											</tr>
 										</thead>
-										<c:if test="${not empty deletionsmessage}">
-											<p class=" text-sm-center text-success pt-3 pb-3"
-												style="border: solid grey; border-width: 2px 2px 2px 2px;"
-												data-bs-toggle="tab">${deletionsmessage}</p>
-											<c:remove var="deletionsmessage" scope="session" />
-										</c:if>
+
+										<%-- Check for success message --%>
+										<%
+										if (session.getAttribute("deletionsmessage") != null) {
+										%>
+										<p class="text-sm-center text-success pt-3 pb-3"
+											style="border: solid green; border-width: 2px 2px 2px 2px;"
+											data-bs-toggle="tab">
+											<%=session.getAttribute("deletionsmessage")%>
+										</p>
+										<%
+										session.removeAttribute("deletionsmessage");
+										%>
+										<%
+										}
+										%>
+
+										<%-- Check for failure message --%>
+										<%
+										if (session.getAttribute("deletionfmessage") != null) {
+										%>
+										<p class="text-sm-center text-danger pt-3 pb-3"
+											style="border: solid red; border-width: 2px 2px 2px 2px;"
+											data-bs-toggle="tab">
+											<%=session.getAttribute("deletionfmessage")%>
+										</p>
+										<%
+										session.removeAttribute("deletionfmessage");
+										%>
+										<%
+										}
+										%>
 
 
-										<c:if test="${not empty deletionfmessage}">
-											<p class=" text-sm-center text-danger">${deletionfmessage}</p>
-											<c:remove var="deletionfmessage" scope="session" />
-										</c:if>
 										<tbody>
 
 											<%
@@ -352,7 +374,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 											%>
 
 											<tr>
-												<td class="cell" id="routeId_<%=item.getId()%>" hidden value="<%=item.getId()%>"><%=item.getId()%></td>
+												<td class="cell" id="routeId_<%=item.getId()%>" hidden
+													value="<%=item.getId()%>"><%=item.getId()%></td>
 
 												<td class="cell"><%=item.getName()%></td>
 												<td class="cell"><span class="truncate"><img
@@ -364,20 +387,23 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 												<td class="cell">
 													<%
 													if ("Active".equals(item.getStatus())) {
-													%> <span class="badge bg-success p-1 ps-2 pe-2" style=" font-size: 14px;">Active</span> <%
+													%> <span class="badge bg-success p-1 ps-2 pe-2"
+													style="font-size: 14px;">Active</span> <%
  } else {
- %> <span class="badge bg-danger p-1 ps-2 pe-2 " style=" font-size: 14px;">Inactive</span> <%
+ %> <span class="badge bg-danger p-1 ps-2 pe-2 "
+													style="font-size: 14px;">Inactive</span> <%
  }
  %>
 												</td>
 												<td class="cell"><a
 													href="editItem.jsp?id=<%=item.getId()%>"
-													class="btn btn-sm btn-primary p-1 ps-2 pe-2"><i class="fas fa-edit me-1"></i>Edit</a> 
-													
-													 <a href="../deleteItem?id=<%=item.getId()%>" class="btn btn-sm btn-danger  p-1 ps-2 pe-2" ><i class="fas fa-trash-alt me-1"></i>Delete</a>
-													 <!-- onclick="showConfirmation('<%=item.getId()%>')"-->
-													</td>
-</td>
+													class="btn btn-sm btn-primary p-1 ps-2 pe-2"><i
+														class="fas fa-edit me-1"></i>Edit</a> <a
+													href="#" onclick="showConfirmation('<%=item.getId()%>')"
+													class="btn btn-sm btn-danger  p-1 ps-2 pe-2"><i
+														class="fas fa-trash-alt me-1" ></i>Delete</a> <!-- onclick="showConfirmation('<%=item.getId()%>')"-->
+												</td>
+												</td>
 
 											</tr>
 											<%}%>

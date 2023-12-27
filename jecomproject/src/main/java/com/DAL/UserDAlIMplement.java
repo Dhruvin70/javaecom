@@ -87,7 +87,7 @@ public class UserDAlIMplement implements UserDAL {
 	public User userLogin(String email, String password) {
 		User logined = null;
 		try {
-			String userValues = "SELECT email,password FROM user WHERE email=? and password=?";
+			String userValues = "SELECT email,password,first FROM user WHERE email=? and password=?";
 
 			PreparedStatement ps = coon.prepareStatement(userValues);
 			ps.setString(1, email);
@@ -97,10 +97,11 @@ public class UserDAlIMplement implements UserDAL {
 
 			if (userDetailSet.next()) {
 
+				String userFirst = userDetailSet.getString("first");
 				logined = new User();
 				logined.setEmail(userDetailSet.getString("email"));
 				logined.setPassword(userDetailSet.getString("password"));
-
+				logined.setFirst(userFirst);
 				String userEmail = userDetailSet.getString("email");
 				String userPassword = userDetailSet.getString("password");
 
@@ -112,6 +113,7 @@ public class UserDAlIMplement implements UserDAL {
 			// Close the ResultSet and PreparedStatement
 			userDetailSet.close();
 			ps.close();
+			coon.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
