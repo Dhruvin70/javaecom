@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "Logout", urlPatterns = { "/logout" })
+@WebServlet(name = "LogoutClient", urlPatterns = { "/logout" })
 public class Logout extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,7 +20,8 @@ public class Logout extends HttpServlet {
 			
 			HttpSession session2 = req.getSession();
 			session.setAttribute("logoutSuccessMsg", "Logout Successfully");
-			resp.sendRedirect("login.jsp");
+			
+			resp.sendRedirect("index.jsp");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

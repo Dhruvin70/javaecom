@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "DeleteItem", urlPatterns = { "/deleteItem" })
+//@WebServlet(name = "DeleteItem", urlPatterns = { "/deleteItem" })
 public class DeleteItem extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -3,16 +3,17 @@
 <div class="container-fluid">
 
 	<div class="row">
-		<div class="col-md-9 col-sm-12 col-8 d-flex align-items-center">
-			<h3 class="ms-3 m-2">Diamond Corporation</h3>
+		<div class="col-md-10 col-sm-6 col-6 d-flex align-items-center">
+			<h3 class="ms-3 m-2">Company</h3>
 		</div>
+		</nav>
 
 		<%
 		if (session.getAttribute("loggedInUser") != null) {
 			User loggedInUser = (User) session.getAttribute("loggedInUser");
 		%>
 		<div
-			class="col-md-3 col-sm-12 col-4 p-3 d-flex align-items-center justify-content-end">
+			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
 			<p class="mb-1 pt-2 fs-4">Welcome,</p>
 			<a href="account.jsp"
 				class="text-decoration-none text-dark fs-3 mx-2 "><%=loggedInUser.getFirst()%></a>
@@ -25,7 +26,7 @@
 		User loggedInAdmin = (User) session.getAttribute("userObj");
 		%>
 		<div
-			class="col-md-3 col-sm-12 col-4 p-3 d-flex align-items-center justify-content-end">
+			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
 			<p class="mb-1 pt-2 fs-4">Welcome,</p>
 			<a href="account.jsp"
 				class="text-decoration-none text-dark fs-3 mx-2 "><%=loggedInAdmin.getFirst()%></a>
@@ -37,7 +38,7 @@
 		} else {
 		%>
 		<div
-			class="col-md-2 col-sm-12 col-12 p-3 d-flex align-items-center justify-content-end">
+			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
 			<a href="login.jsp" class="btn btn-outline-primary m-2"
 				style="width: 80px">Login</a> <a href="register.jsp"
 				class="btn btn-outline-success m-2" type="button">Register</a>
