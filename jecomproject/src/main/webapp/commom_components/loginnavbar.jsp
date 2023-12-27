@@ -58,13 +58,15 @@
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<p class="modal-title">Logout</p>
+			<p class="modal-title mt-3 ms-2">Log Out</p>
+			<hr>
 			<div class="modal-body ">
+			
 				<div class="align-items-center text-center ">
 					<p class="mt-1 fs-2">Are you sure?</p>
 					<hr>
 					<a type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</a>
-					<a href="logout" ="button" class="btn btn-danger">Logout</a>
+					<a href="logout" ="button" class="btn btn-danger">Log Out</a>
 				</div>
 			</div>
 		</div>

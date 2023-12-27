@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>My Account</title>
     
     <!-- Meta -->
     <meta charset="utf-8">
@@ -41,38 +41,38 @@
 							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
 				        </form>
 		            </div><!--//app-search-box-->
-		            
+	            
 		            <div class="app-utilities col-auto">
 			            <div class="app-utility-item app-notifications-dropdown dropdown">    
 				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	<!--				            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
   <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
 </svg>
 					            <span class="icon-badge">3</span>
 					        </a><!--//dropdown-toggle-->
-					        
+	<!--				        
 					        <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
 					            <div class="dropdown-menu-header p-3">
 						            <h5 class="dropdown-menu-title mb-0">Notifications</h5>
 						        </div><!--//dropdown-menu-title-->
-						        <div class="dropdown-menu-content">
+		<!--				        <div class="dropdown-menu-content">
 							       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
 									        <div class="col-auto">
 										       <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
 									        </div><!--//col-->
-									        <div class="col">
+		<!--							        <div class="col">
 										        <div class="info"> 
 											        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 											        <div class="meta"> 2 hrs ago</div>
 										        </div>
 									        </div><!--//col--> 
-								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+	<!--							        </div><!--//row-->
+		<!--						        <a class="link-mask" href="notifications.html"></a>
 							       </div><!--//item-->
-							       <div class="item p-3">
+		<!--					       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
 									        <div class="col-auto">
 										        <div class="app-icon-holder">
@@ -82,16 +82,16 @@
 	</svg>
 										        </div>
 									        </div><!--//col-->
-									        <div class="col">
+		<!--							        <div class="col">
 										        <div class="info"> 
 											        <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
 											        <div class="meta"> 1 day ago</div>
 										        </div>
 									        </div><!--//col-->
-								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+	<!--							        </div><!--//row-->
+		<!--						        <a class="link-mask" href="notifications.html"></a>
 							       </div><!--//item-->
-							       <div class="item p-3">
+		<!--					       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
 									        <div class="col-auto">
 										        <div class="app-icon-holder icon-holder-mono">
@@ -100,41 +100,41 @@
 </svg>
 										        </div>
 									        </div><!--//col-->
-									        <div class="col">
+	<!--								        <div class="col">
 										        <div class="info"> 
 											        <div class="desc">Your report is ready. Proin venenatis interdum est.</div>
 											        <div class="meta"> 3 days ago</div>
 										        </div>
 									        </div><!--//col-->
-								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+	<!--							        </div><!--//row-->
+	<!--							        <a class="link-mask" href="notifications.html"></a>
 							       </div><!--//item-->
-							       <div class="item p-3">
+		<!--					       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
 									        <div class="col-auto">
 										       <img class="profile-image" src="assets/images/profiles/profile-2.png" alt="">
 									        </div><!--//col-->
-									        <div class="col">
+		<!--							        <div class="col">
 										        <div class="info"> 
 											        <div class="desc">James sent you a new message.</div>
 											        <div class="meta"> 7 days ago</div>
 										        </div>
 									        </div><!--//col--> 
-								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
-							       </div><!--//item-->
-						        </div><!--//dropdown-menu-content-->
-						        
+	<!--							        </div><!--//row-->
+		<!--						        <a class="link-mask" href="notifications.html"></a>
+	<!--						       </div><!--//item-->
+	<!--					        </div><!--//dropdown-menu-content-->
+		<!--				        
 						        <div class="dropdown-menu-footer p-2 text-center">
 							        <a href="notifications.html">View all</a>
 						        </div>
 															
 							</div><!--//dropdown-menu-->					        
-				        </div><!--//app-utility-item-->
-			            <div class="app-utility-item">
+		<!--		        </div><!--//app-utility-item-->
+		<!--	            <div class="app-utility-item">
 				            <a href="settings.html" title="Settings">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		<!--			            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
   <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
 </svg>
@@ -147,7 +147,8 @@
 								<li><a class="dropdown-item" href="account.html">Account</a></li>
 								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
+								<li><a class="dropdown-item" href="account.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal">Log Out</a></li>
+																
 							</ul>
 			            </div><!--//app-user-dropdown--> 
 		            </div><!--//app-utilities-->
@@ -179,7 +180,7 @@
 					    </li><!--//nav-item-->
 					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="orders.html">
+					        <a class="nav-link" href="admin/all_items.jsp">
 						        <span class="nav-icon">
 						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>
@@ -241,6 +242,7 @@
 						        <ul class="submenu-list list-unstyled">
 							     
 							        <li class="submenu-item"><a class="submenu-link" href="reset-password.jsp">Reset password</a></li>
+							         <li class="submenu-item"><a class="submenu-link" href="help.jsp">Help</a></li>
 							        
 						        </ul>
 					        </div>
@@ -539,6 +541,47 @@
     
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
+    
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<p class="modal-title mt-3 ms-2">Log Out</p>
+			<hr>
+			<div class="modal-body ">
+			
+				<div class="align-items-center text-center ">
+					<p class="mt-1 fs-2">Are you sure?</p>
+					<hr>
+					<a type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</a>
+					<a href="logout" type="button" class="btn btn-danger">Log Out</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    
+    <div class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Modal body text goes here.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 </body>
 </html> 
