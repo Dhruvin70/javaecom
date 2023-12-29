@@ -62,7 +62,7 @@ h5 {
 }
 
 .slider-btn .btn-md-6 {
-   background-color: #8bc34ac4;
+   background-color: black;
    color: aliceblue;
    border-radius: 5px;
    padding: 1.5rem 1.5rem;
@@ -75,7 +75,7 @@ h5 {
 
 .slider-btn .btn-md-6:hover {
    background-color: aliceblue;
-   color: #72e614;
+   color:black;
    font-size: 1.25rem; /* Adjust font size on hover */
    padding: 1.5rem 2rem;
 }

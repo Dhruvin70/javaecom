@@ -41,7 +41,7 @@
 
 							<div class="form-group">
 
-								<label for="inputState">Name</label><input name="name"
+								<label for="inputState">Artwork</label><input name="name"
 									type="text" class="form-control" id="inputsection" required>
 
 							</div>
@@ -49,7 +49,7 @@
 
 							<div class="form-group">
 
-								<label for="inputState">Product</label><input name="product"
+								<label for="inputState"> Artist Name</label><input name="product"
 									type="text" class="form-control" id="inputsection" required>
 
 							</div>
@@ -72,8 +72,8 @@
 								<label for="inputState">Status</label><select id="status"
 									name="itemStatus" class="form-control">
 
-									<option selected value="Active" style="color: green">Active</option>
-									<option value="Inactive" style="color: red">Inactive</option>
+									<option selected value="Active" style="color: green">Available</option>
+									<option value="Inactive" style="color: red">Sold</option>
 								</select>
 
 							</div>
