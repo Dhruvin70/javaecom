@@ -159,18 +159,28 @@ public class ItemsImplement implements ItemsDAO {
 	}
 
 	public boolean deleteById(int id) {
+		
+		System.out.println("I am at delete function");
+		
 		boolean deleted = false;
 		
 		try {
-			String sqldelete = "Delete From `dmaven`.`admin_add_items` where id=? ";
-			PreparedStatement ps = coon.prepareStatement(sqldelete);
-			 
-			
+			String sqldelete = "Delete From `dmaven`.`admin_add_items` WHERE id=? ";
+			PreparedStatement ps = coon.prepareStatement(sqldelete);			 		
 			ps.setInt(1, id);
 			
 			int i = ps.executeUpdate();
 			
 			if (i == 1) {
+				// Drop column
+			    String dropId = "ALTER TABLE `dmaven`.`admin_add_items` DROP COLUMN id";
+			    PreparedStatement psDrop = coon.prepareStatement(dropId);
+			    psDrop.executeUpdate();
+
+			    // Recreate id column as primary key
+			    String recreateId = "ALTER TABLE `dmaven`.`admin_add_items` ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT";
+			    PreparedStatement psRecreate = coon.prepareStatement(recreateId);
+			    psRecreate.executeUpdate();
 				deleted=true;
 			}
 			} catch (Exception e) {

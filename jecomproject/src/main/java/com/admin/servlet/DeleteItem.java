@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import com.DAL.ItemsImplement;
 import com.DB.DBConnect;
-import com.entity.Items;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,12 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//@WebServlet(name = "DeleteItem", urlPatterns = { "/deleteItem" })
+@WebServlet(name = "Delete", urlPatterns = { "/deleteItem" })
 public class DeleteItem extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int id = Integer.parseInt(req.getParameter("id"));
+			System.out.println(id);
 
 			ItemsImplement dao = new ItemsImplement(DBConnect.getConn());
 			HttpSession session = req.getSession();
@@ -43,3 +42,5 @@ public class DeleteItem extends HttpServlet {
 	}
 
 }
+
+

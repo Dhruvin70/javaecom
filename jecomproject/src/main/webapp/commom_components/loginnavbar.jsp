@@ -15,7 +15,7 @@
 		<div
 			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
 			<p class="mb-1 pt-2 fs-4">Welcome,</p>
-			<a href="account.jsp"
+			<a href="account.jsp?login"
 				class="text-decoration-none text-dark fs-3 mx-2 "><%=loggedInUser.getFirst()%></a>
 			<!-- Add any other information you want to display for the logged-in user -->
 			<a href="register.jsp" class="btn btn-danger m-2"
@@ -66,7 +66,7 @@
 					<p class="mt-1 fs-2">Are you sure?</p>
 					<hr>
 					<a type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</a>
-					<a href="logout" ="button" class="btn btn-danger">Log Out</a>
+					<a href="logout" type="button" class="btn btn-danger">Log Out</a>
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <element>
-<web-app id="WebApp_ID" version="6.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-  
+<web-app id="WebApp_ID" version="6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" >
   <servlet>
         <servlet-name>userRegister</servlet-name>
         <servlet-class>com.user.servlet.AddRegister</servlet-class>
@@ -24,6 +21,16 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+     <servlet>
+        <servlet-name>LogoutClient</servlet-name>
+        <servlet-class>com.user.servlet.Logout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutClient</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>AdminAddItems</servlet-name>
         <servlet-class>com.admin.servlet.AdminAddItems</servlet-class>
@@ -35,25 +42,15 @@
     </servlet-mapping>
     
      <servlet>
-        <servlet-name>EditItems</servlet-name>
-        <servlet-class>com.admin.servlet.EditItems</servlet-class>
+        <servlet-name>Delete</servlet-name>
+        <servlet-class>com.admin.servlet.DeleteItem</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>EditItems</servlet-name>
-        <url-pattern>/editItem</url-pattern>
+        <servlet-name>Delete</servlet-name>
+        <url-pattern>/deleteItem</url-pattern>
     </servlet-mapping>
     
-     <servlet>
-        <servlet-name>LogoutClient</servlet-name>
-        <servlet-class>com.user.servlet.Logout</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LogoutClient</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
     
- 
 </web-app>
 </element>

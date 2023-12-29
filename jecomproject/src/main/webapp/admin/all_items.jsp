@@ -136,7 +136,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 									<li><a class="dropdown-item" href="../account.jsp">Account</a></li>
 
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="login.jsp">Log Out</a></li>
+									<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"  href="register.jsp">Log Out</a></li>
 								</ul>
 							</div>
 							<!--//app-user-dropdown-->
@@ -399,14 +399,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 													href="editItem.jsp?id=<%=item.getId()%>"
 													class="btn btn-sm btn-primary p-1 ps-2 pe-2"><i
 														class="fas fa-edit me-1"></i>Edit</a> <a
-													href="#" onclick="showConfirmation('<%=item.getId()%>')"
-													class="btn btn-sm btn-danger  p-1 ps-2 pe-2"><i
+													href="#"
+													class="btn btn-sm btn-danger  p-1 ps-2 pe-2" onclick="showConfirmation('<%=item.getId()%>')"><i
 														class="fas fa-trash-alt me-1" ></i>Delete</a> <!-- onclick="showConfirmation('<%=item.getId()%>')"-->
 												</td>
 												</td>
 
 											</tr>
-											<%}%>
+											<%System.out.print(item);}
+											
+											%>
 										</tbody>
 									</table>
 								</div>
@@ -615,6 +617,48 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 
 	<!-- Page Specific JS -->
 	<script src="../assets/js/app.js"></script>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<p class="modal-title mt-3 ms-2">Log Out</p>
+			<hr>
+			<div class="modal-body ">
+			
+				<div class="align-items-center text-center ">
+					<p class="mt-1 fs-2">Are you sure?</p>
+					<hr>
+					<a type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</a>
+					<a href="../logout" type="button" class="btn btn-danger">Log Out</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Modal body text goes here.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
 
