@@ -24,19 +24,31 @@
 					<div class="card-body">
 						<h4 class="text-center">Add Items</h4>
 						<%-- Check for success message --%>
-                        <% if (session.getAttribute("smessage") != null) { %>
-                            <p class="text-center text-success"><%= session.getAttribute("smessage") %></p>
-                            <% session.removeAttribute("smessage"); %>
-                        <% } %>
+						<%
+						if (session.getAttribute("smessage") != null) {
+						%>
+						<p class="text-center text-success"><%=session.getAttribute("smessage")%></p>
+						<%
+						session.removeAttribute("smessage");
+						%>
+						<%
+						}
+						%>
 
-                        <%-- Check for failure message --%>
-                        <% if (session.getAttribute("fmessage") != null) { %>
-                            <p class="text-center text-danger"><%= session.getAttribute("fmessage") %></p>
-                            <% session.removeAttribute("fmessage"); %>
-                        <% } %>
+						<%-- Check for failure message --%>
+						<%
+						if (session.getAttribute("fmessage") != null) {
+						%>
+						<p class="text-center text-danger"><%=session.getAttribute("fmessage")%></p>
+						<%
+						session.removeAttribute("fmessage");
+						%>
+						<%
+						}
+						%>
 						<form action="../adminAddItems" method="post"
 							enctype="multipart/form-data">
-							
+
 
 
 							<div class="form-group">
@@ -49,8 +61,9 @@
 
 							<div class="form-group">
 
-								<label for="inputState"> Artist Name</label><input name="product"
-									type="text" class="form-control" id="inputsection" required>
+								<label for="inputState"> Artist Name</label><input
+									name="product" type="text" class="form-control"
+									id="inputsection" required>
 
 							</div>
 
@@ -63,8 +76,8 @@
 							</div>
 							<div class="form-group">
 
-								<label for="inputState">Price</label><input name="price"
-									type="text" class="form-control" id="inputsection" required>
+								<label for="inputState">Price</label>
+									<input name="price" type="text" class="form-control" id="inputsection" pattern="[0-9]+(\.[0-9]+)?" title="Enter a valid number with decimals" required>
 
 							</div>
 							<div class="form-group">

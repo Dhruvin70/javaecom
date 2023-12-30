@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="navbar col-md-12 navbar-expand-lg navbar-dark" style="background-color:black;">
+        <nav class="navbar col-md-12 navbar-expand-sm navbar-dark" style="background-color:black;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa-solid fa-house ms-3"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -12,7 +12,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active " aria-current="page" href="#">Home</a>
+                            <a class="nav-link active " aria-current="page" href="index.jsp">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="#"><i class="fa-solid fa-info me-1"></i>About
@@ -38,7 +38,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i
+                            <a class="nav-link" href="cart.jsp"><i
                                     class="fa-solid fa-solid fa-cart-shopping fa-flip-horizontal me-1"
                                     data-bs-toggle="tooltip" title="Hooray!"></i>My Cart</a>
                         </li>

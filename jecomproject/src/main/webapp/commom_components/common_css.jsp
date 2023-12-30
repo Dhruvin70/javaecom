@@ -30,3 +30,16 @@
 <%-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --%>
+<!-- ---------------------- keeping user on same p  -->
+
+<!-- <script>
+    // Check if the URL contains a fragment identifier
+    var fragment = window.location.hash.substring(1);
+    if (fragment) {
+        // Scroll to the element with the corresponding identifier
+        var element = document.getElementById(fragment);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script> -->

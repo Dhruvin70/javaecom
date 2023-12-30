@@ -159,34 +159,73 @@ public class ItemsImplement implements ItemsDAO {
 	}
 
 	public boolean deleteById(int id) {
-		
+
 		System.out.println("I am at delete function");
-		
+
 		boolean deleted = false;
-		
+
 		try {
 			String sqldelete = "Delete From `dmaven`.`admin_add_items` WHERE id=? ";
-			PreparedStatement ps = coon.prepareStatement(sqldelete);			 		
+			PreparedStatement ps = coon.prepareStatement(sqldelete);
 			ps.setInt(1, id);
-			
+
 			int i = ps.executeUpdate();
-			
+
 			if (i == 1) {
 				// Drop column
-			    String dropId = "ALTER TABLE `dmaven`.`admin_add_items` DROP COLUMN id";
-			    PreparedStatement psDrop = coon.prepareStatement(dropId);
-			    psDrop.executeUpdate();
+				String dropId = "ALTER TABLE `dmaven`.`admin_add_items` DROP COLUMN id";
+				PreparedStatement psDrop = coon.prepareStatement(dropId);
+				psDrop.executeUpdate();
 
-			    // Recreate id column as primary key
-			    String recreateId = "ALTER TABLE `dmaven`.`admin_add_items` ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT";
-			    PreparedStatement psRecreate = coon.prepareStatement(recreateId);
-			    psRecreate.executeUpdate();
-				deleted=true;
+				// Recreate id column as primary key
+				String recreateId = "ALTER TABLE `dmaven`.`admin_add_items` ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT";
+				PreparedStatement psRecreate = coon.prepareStatement(recreateId);
+				psRecreate.executeUpdate();
+				deleted = true;
 			}
-			} catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return deleted;
 	}
+
+	@Override
+	public List<Items> getNewBooks() {
+
+		List<Items> list = new ArrayList<Items>();
+		Items item = null; 
+		try {
+			
+		
+		String sql = "SELECT * FROM admin_add_items WHERE status=? ORDER BY id DESC";
+		PreparedStatement ps = coon.prepareStatement(sql);
+		ps.setString(1,"Active");
+		
+		ResultSet rs  = ps.executeQuery();
+		int i = 4;
+		while(rs.next() && i<=4) {
+			item = new Items();
+			item.setName(rs.getString("name"));
+			item.setProduct(rs.getString("product"));
+			item.setProduct_code(rs.getString("product_code"));
+			double priceDouble = rs.getDouble("price");
+			item.setPrice(String.valueOf(priceDouble));
+			item.setStatus(rs.getString("status"));
+			item.setItemimg(rs.getString("file_name"));
+			item.setId(rs.getInt("id"));
+			list.add(item);
+			i++;
+			
+		}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+
+	
 }

@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Portal - Bootstrap 5 Admin Dashboard Template For
-	Developers</title>
+<title>Admin: Home
+	</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -317,7 +317,7 @@
 									<li class="submenu-item"><a class="submenu-link"
 										href="all_items.jsp">All Items</a></li>
 									<li class="submenu-item"><a class="submenu-link active"
-										href="add_itme.jsp">Add Items</a></li>
+										href="add_item.jsp">Add Items</a></li>
 								
 								</ul>
 							</div>

@@ -87,7 +87,7 @@ public class UserDAlIMplement implements UserDAL {
 	public User userLogin(String email, String password) {
 		User logined = null;
 		try {
-			String userValues = "SELECT email,password,first FROM user WHERE email=? and password=?";
+			String userValues = "SELECT * FROM user WHERE email=? and password=?";
 
 			PreparedStatement ps = coon.prepareStatement(userValues);
 			ps.setString(1, email);
@@ -102,9 +102,9 @@ public class UserDAlIMplement implements UserDAL {
 				logined.setEmail(userDetailSet.getString("email"));
 				logined.setPassword(userDetailSet.getString("password"));
 				logined.setFirst(userFirst);
-				String userEmail = userDetailSet.getString("email");
-				String userPassword = userDetailSet.getString("password");
-
+				logined.setId(userDetailSet.getInt("id"));
+				
+				
 				// Print user data to the console
 				System.out.println("User Email: " + logined.getEmail());
 				System.out.println("User Password: " + logined.getPassword());

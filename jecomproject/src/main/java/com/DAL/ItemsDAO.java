@@ -14,4 +14,7 @@ public interface ItemsDAO {
 	public boolean updateById(Items code);
 	
 	public boolean deleteById(int id);
+	
+	public List<Items> getNewBooks();
+	
 }

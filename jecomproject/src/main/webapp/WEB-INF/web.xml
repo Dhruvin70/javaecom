@@ -51,6 +51,16 @@
         <url-pattern>/deleteItem</url-pattern>
     </servlet-mapping>
     
+     <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>com.user.servlet.CartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/addingToCart</url-pattern>
+    </servlet-mapping>
+    
     
 </web-app>
 </element>
