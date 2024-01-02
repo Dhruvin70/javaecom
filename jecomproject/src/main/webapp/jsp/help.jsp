@@ -15,10 +15,10 @@
     <link rel="shortcut icon" href="favicon.ico"> 
     
     <!-- FontAwesome JS-->
-    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    <script defer src="../assets/plugins/fontawesome/js/all.min.js"></script>
     
     <!-- App CSS -->  
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
 
 </head> 
 
@@ -29,10 +29,10 @@
 		        <div class="app-header-content "> 
 		            <div class="row justify-content-between align-items-center">        
 					    <div class="app-utility-item app-user-dropdown dropdown">
-				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="assets/images/user.png" alt="user profile"></a>
+				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="../assets/images/user.png" alt="user profile"></a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
 								<li><a class="dropdown-item" href="account.jsp">Account</a></li>
-								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
+								<li><a class="dropdown-item" href="../logout">Log Out</a></li>
 							</ul>
 			            </div><!--//app-user-dropdown-->  
 		            </div><!--//app-utilities-->
@@ -423,11 +423,11 @@
 
  
     <!-- Javascript -->          
-    <script src="assets/plugins/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    <script src="../assets/plugins/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
     
     <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script> 
+    <script src="../assets/js/app.js"></script> 
 
 </body>
 </html> 

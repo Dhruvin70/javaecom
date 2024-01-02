@@ -1,3 +1,8 @@
+<%@page import="com.DB.DBConnect"%>
+<%@page import="com.entity.Cart"%>
+<%@page import="com.entity.User"%>
+<%@page import="java.util.List"%>
+<%@page import="com.DAL.CartImplementation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,7 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <%@ include file="/commom_components/common_css.jsp"%>
+
 <style>
 @media ( min-width : 1025px) {
 	.h-custom {
@@ -13,9 +20,47 @@
 	}
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/cart.css">
 
 </head>
 <body>
+	<script>
+    function deleteCartItem(cartId, userId) {
+        $.ajax({
+            type: "GET",
+            url: "../removecid?cid=" + cartId + "&uid=" + userId,
+            success: function(response) {
+                // Handle the response, if needed
+                console.log(response);
+                // You can update the page dynamically here if necessary
+                
+                    // Refresh the page after successful deletion
+                location.reload(true);
+
+                // Optionally, trigger a client-side event or perform any additional actions
+            },
+            error: function(error) {
+                console.error("Error deleting item:", error);
+            }
+        });
+
+        // Prevent the default behavior of the link (prevents the page from navigating)
+        return false;
+    }
+</script>
+
+
+	<%
+	User loggedInUser = (User) session.getAttribute("loggedInUser");
+	if (session.getAttribute("loggedInUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+
+	}
+	%>
+
+
 	<section class="h-100 h-custom">
 		<div class="container h-100 py-5">
 			<div
@@ -26,44 +71,79 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col" class="h5">Shopping Bag</th>
-									<th scope="col">Format</th>
+									<%
+									User u = (User) session.getAttribute("loggedInUser");
+									CartImplementation dao = new CartImplementation(DBConnect.getConn());
+									List<Cart> cartitem = dao.getBookByUser(u.getId());
+									System.out.println(cartitem);
+									String cartmsg = (cartitem.isEmpty()) ? "Nothing In Your " : "";
+									session.setAttribute("cartmsg", cartmsg);
+									%>
+
+									<th scope="col" class="h5"><%=session.getAttribute("cartmsg")%>Shopping
+										Bag</th>
+
+									<th scope="col">Art</th>
+									<th scope="col">Artist</th>
 									<th scope="col">Price</th>
 									<th scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
+
+								<%
+								double totalprice = 0;
+								for (Cart c : cartitem) {
+									totalprice = c.getTotalprice();
+									System.out.println("-----------------------------------------------------------------");
+									System.out.println("at  total: " + totalprice);
+									System.out.println("------------------------------------------------------------------");
+								%>
+
 								<tr>
 									<th scope="row">
-										<div class="d-flex align-items-center">
-											<img src="https://i.imgur.com/2DsA49b.webp"
-												class="img-fluid rounded-3" style="width: 120px;" alt="Book">
-											<div class="flex-column ms-4">
-												<p class="mb-2">Thinking, Fast and Slow</p>
-												<p class="mb-0">Daniel Kahneman</p>
-											</div>
+										<div class=>
+											<img src="../items/<%=c.getFilename()%>"
+												class="img-fluid rounded-3"
+												style="width: 120px; height: 90px" alt="Book">
+
 										</div>
 									</th>
 
 
 									<td class="align-middle">
-										<p class="mb-0" style="font-weight: 500;">Digital</p>
+										<p class="mb-0" style="font-weight: 500;"><%=c.getArtName()%></p>
 									</td>
 
 									<td class="align-middle">
-										<p class="mb-0" style="font-weight: 500;">$9.99</p>
+										<p class="mb-0" style="font-weight: 500;"><%=c.getArtist()%></p>
 
 
 
 									</td>
-									<td class="align-middle"><a href="#!" class="text-danger"><i
+									<td class="align-middle">
+										<p class="mb-0" style="font-weight: 500;"><%=c.getPrice()%></p>
+									</td>
+									<td class="align-middle"><a href="#" class="text-danger"
+										onclick="deleteCartItem(<%=c.getCartId()%>, <%=c.getUserId()%>)"><i
 											class="fas fa-trash fa-lg"></i></a></td>
 								</tr>
 
+								<%
+								}
+
+								double tax = 0.07 * totalprice;
+								double x = (cartitem.isEmpty()) ? 0 : 2.99;
+								double totalpricewithTax = totalprice + x + tax;
+								%>
 							</tbody>
 						</table>
 					</div>
-
+					<a href="../index.jsp" type="button" class="btn btn-primary btn-block btn-lg mb-3">
+						<div class="d-flex justify-content-between">
+							<span>Continue Shopping</span>
+						</div>
+					</a>
 					<div class="card shadow-2-strong mb-5 mb-lg-0"
 						style="border-radius: 16px;">
 						<div class="card-body p-4">
@@ -155,7 +235,7 @@
 									<div class="d-flex justify-content-between"
 										style="font-weight: 500;">
 										<p class="mb-2">Subtotal</p>
-										<p class="mb-2">$23.49</p>
+										<p class="mb-2"><%=totalprice%></p>
 									</div>
 
 									<div class="d-flex justify-content-between"
@@ -164,19 +244,27 @@
 										<p class="mb-0">$2.99</p>
 									</div>
 
+									<div class="d-flex justify-content-between"
+										style="font-weight: 500;">
+										<p class="mb-0">Tax & Service Charges</p>
+										<p class="mb-0"><%=tax%></p>
+									</div>
+
 									<hr class="my-4">
 
 									<div class="d-flex justify-content-between mb-4"
 										style="font-weight: 500;">
 										<p class="mb-2">Total (tax included)</p>
-										<p class="mb-2">$26.48</p>
+										<div class="mb-2">
+											$<%=totalpricewithTax%></div>
 									</div>
 
 									<button type="button" class="btn btn-primary btn-block btn-lg">
 										<div class="d-flex justify-content-between">
-											<span>Checkout</span> <span>$26.48</span>
+											<span>Checkout</span> <span>$<%=totalpricewithTax%></span>
 										</div>
 									</button>
+
 
 								</div>
 							</div>

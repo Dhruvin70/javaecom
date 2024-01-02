@@ -13,10 +13,10 @@
     <link rel="shortcut icon" href="favicon.ico"> 
     
     <!-- FontAwesome JS-->
-    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    <script defer src="../assets/plugins/fontawesome/js/all.min.js"></script>
     
     <!-- App CSS -->  
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
 
 </head> 
 
@@ -25,10 +25,10 @@
 	    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
 		    <div class="d-flex flex-column align-content-end">
 			    <div class="app-auth-body mx-auto">	
-				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"></a></div>
+				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="../assets/images/app-logo.svg" alt="logo"></a></div>
 					<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
 			        <div class="auth-form-container text-start">
-						<form  action="login" method="post">         
+						<form  action="../login" method="post">         
 							<div class="email mb-3">
 								<label class="sr-only" for="signin-email">Email</label>
 								<input id="signin-email" type="email" class="form-control signin-email" name="email" placeholder="Email address" required="required">
@@ -57,7 +57,7 @@
 							</div>
 						</form>
 						
-						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="register.jsp" >here</a>.</div>
+						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="../register.jsp" >here</a>.</div>
 						<div class="form-outline text-center">
                         <p>or sign in with:</p>
                         <button type="button" class="btn btn-link btn-floating mx-1">

@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "userRegister", urlPatterns = { "/register" })
 public class AddRegister extends HttpServlet {
@@ -33,14 +34,14 @@ public class AddRegister extends HttpServlet {
             if(UserDAlIMplement.isStrongPassword(password)) {
             	String pmessage = "Passwords not strong";
                 req.setAttribute("message", pmessage);
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                res.sendRedirect("register.jsp");
                 return;
             }
             
            
             
             String hashedpassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
-           
+            HttpSession session = req.getSession();
 
             // Printing in the console for debugging purpose
             System.out.println("First Name: " + first);
@@ -57,24 +58,23 @@ public class AddRegister extends HttpServlet {
             UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
             if(DBConnect.getConn()==null) {
             	String message = "Connection error";
-                req.setAttribute("message", message);
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                session.setAttribute("message", message);
+                res.sendRedirect("register.jsp");
                 return;
             }
 
             if (dal.isUserExists(email)) {
                 String message = "Account with this email already registered";
-                req.setAttribute("message", message);
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                session.setAttribute("message", message);
+                res.sendRedirect("register.jsp");
                 return;
             }
 
             // Password equality check
             if (!req.getParameter("password").equals(req.getParameter("repassword"))) {
                 String message = "Passwords do not match";
-                req.setAttribute("message", message);
-                req.getRequestDispatcher("/register.jsp").forward(req, res);
-                
+                session.setAttribute("message", message);
+                res.sendRedirect("register.jsp");                
                 return;
             }
 
@@ -95,17 +95,16 @@ public class AddRegister extends HttpServlet {
             if (success) {
                 // Registration successful, set success message
                 String successMessage = "Registration successful. Redirecting to login page...";
-                req.setAttribute("successMessage", successMessage);
-
+                session.setAttribute("successMessage", successMessage);
+           
                 // Forward to register.jsp to display the success message
-//                req.getRequestDispatcher("/register.jsp").forward(req, res);
-
+                res.sendRedirect("jsp/login.jsp");
                 }
             	else {
                 // Registration failed, set failure message
                 String message = "Registration failed. Please try again.";
-                req.setAttribute("message", message);
-//                req.getRequestDispatcher("/register.jsp").forward(req, res);
+                session.setAttribute("message", message);
+                res.sendRedirect("register.jsp");
                 return;
             }
 

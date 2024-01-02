@@ -203,7 +203,7 @@ public class ItemsImplement implements ItemsDAO {
 		ps.setString(1,"Active");
 		
 		ResultSet rs  = ps.executeQuery();
-		int i = 4;
+		int i = 0;
 		while(rs.next() && i<=4) {
 			item = new Items();
 			item.setName(rs.getString("name"));
@@ -222,7 +222,7 @@ public class ItemsImplement implements ItemsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return list;
 
 	}

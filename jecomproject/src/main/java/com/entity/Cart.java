@@ -3,13 +3,24 @@ package com.entity;
 public class Cart {
 
 	private int itemId, userId, cartId;
-	private String artName, artist;
+	private String artName, artist,filename;
 	private double  price, totalprice;
 
 	public Cart() {
 		super();
 
 	}
+
+	
+	public String getFilename() {
+		return filename;
+	}
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 
 	public int getItemId() {
 		return itemId;

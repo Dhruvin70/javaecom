@@ -591,20 +591,27 @@
 												for="form3Example4cdg">Repeat your password</label>
 										</div>
 										<%
-										String message = (String) request.getAttribute("message");
-										String successMessage = (String) request.getAttribute("successMessage");
+										String message = (String) session.getAttribute("message");
+										String successMessage = (String) session.getAttribute("successMessage");
 
 										if (message != null) {
 										%>
 										<p class="form-outline ms-2" style="color: red;"><%=message%></p>
-										
+
 										<%
 										} else if (successMessage != null) {
 										%>
 										<p class="form-outline ms-2" style="color: green;"><%=successMessage%></p>
 										<%
-										}
+										} else
 										%>
+										<p class="form-outline ms-2" style="color: green;"></p>
+										<%
+session.removeAttribute("message");
+session.removeAttribute("successMessage");
+
+%>
+
 
 										<div class="row">
 											<div
@@ -644,7 +651,6 @@
 		</div>
 
 	</section>
-
 
 
 </body>

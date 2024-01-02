@@ -7,15 +7,19 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamond Corporation</title>
+<title>Paintings: Home</title>
+<link rel="stylesheet" type="text/css" href="css/cart.css">
+
 <%@ include file="/commom_components/common_css.jsp"%>
+
 <style>
 .stickyimage {
 	margin-top: 20px;
 	background: white;
-	background-image: url('images/pexels.jpg');
+	background-image: url('images/main.jpeg');
 	height: 90vh;
 	width: 100%;
 	background-size: 100% 100%;
@@ -23,15 +27,18 @@
 	background-repeat: no-repeat;
 }
 
+/* Responsive design for card container */
 .card-container {
 	display: flex;
-	flex-flow: row wrap;
+	flex-wrap: wrap;
 	justify-content: space-around;
 	margin-top: 20px;
 }
 
+/* Responsive design for individual cards */
 .card {
-	width: 100%;
+	flex: 1 1 250px;
+	/* Flex properties for responsiveness */
 	max-width: 250px;
 	border: solid 1px white;
 	box-shadow: 0px 0px 2px 2px rgb(255, 255, 255);
@@ -45,16 +52,19 @@
 	box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.692);
 }
 
+/* Responsive design for card images */
 .card img {
 	width: 100%;
 	height: auto;
 	max-height: 200px;
 }
 
+/* Center text in card */
 .card-text {
 	text-align: center;
 }
 
+/* Responsive design for button container and buttons */
 .btn-container {
 	display: flex;
 	justify-content: center;
@@ -66,91 +76,74 @@
 	height: 40px;
 }
 </style>
+
+
 </head>
 
 <body style="background-color: black;">
 
-<%
-if(session.getAttribute("addCart") != null){
-%>
-<style>
-   /* Add your CSS styles for the snackbar here */
+	<script>
+    function addToCart(itemId, uidfkid) {
+        $.ajax({
+            type: "GET",
+            url: "addingToCart?itemId=" + itemId + "&uidfkid=" + uidfkid,
+            success: function(response) {
+                // Handle the response, if needed
+                console.log(response);
 
-   /* Example styles */
-   #snackbar {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 2px;
-      padding: 16px;
-      position: fixed;
-      z-index: 1;
-      left: 50%;
-      bottom: 30px;
-      font-size: 17px;
-   }
+                // Display Snackbar message
+                  location.reload(true);
+                
 
-   #snackbar.show {
-      visibility: visible;
-      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
-   }
+                // Reload the page after successful addition to the cart
+             
+                	displayNotification();
+               
 
-   @-webkit-keyframes fadein {
-      from {bottom: 0; opacity: 0;}
-      to {bottom: 30px; opacity: 1;}
-   }
+              
+            },
+            error: function(error) {
+                console.error("Error adding item to cart:", error);
+            }
+        });
 
-   @keyframes fadein {
-      from {bottom: 0; opacity: 0;}
-      to {bottom: 30px; opacity: 1;}
-   }
+        // Prevent the default behavior of the link (prevents the page from navigating)
+        return false;
+    }
 
-   @-webkit-keyframes fadeout {
-      from {bottom: 30px; opacity: 1;}
-      to {bottom: 0; opacity: 0;}
-   }
+    function displayNotification() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
 
-   @keyframes fadeout {
-      from {bottom: 30px; opacity: 1;}
-      to {bottom: 0; opacity: 0;}
-   }
-</style>
-
-<script>
-   function myFunction() {
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-   }
-   // Call the function after the page loads
-   document.addEventListener("DOMContentLoaded", function() {
-      myFunction();
-   });
+    // Call the function after the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        // You may want to call myFunction here if you have other functionality in it
+    });
 </script>
 
-<%
-}
-%>
-<%
+
+
+	<!-- Include the snackbar HTML element where you want it to appear -->
+	<div id="snackbar">Item added to cart!</div>
+
+	
+	<%
 // Clear session attributes after use
 session.removeAttribute("addCart");
 session.removeAttribute("addCartFailed");
-%>
+%> 
 
-<!-- Include the snackbar HTML element where you want it to appear -->
-<div id="snackbar">Item added to cart!</div>
+
 
 	<%
 	User u = (User) session.getAttribute("loggedInUser");
 	System.out.print(u);
 	%>
 
-	<%@ include file="/commom_components/loginnavbar.jsp"%>
-	<%@ include file="/commom_components/navbar.jsp"%>
+	<%@ include file="commom_components/loginnavbar.jsp"%>
+	<%@ include file="commom_components/navbar.jsp"%>
 	<%
 	Connection connection = DBConnect.getConn();
 
@@ -169,15 +162,16 @@ session.removeAttribute("addCartFailed");
 			ItemsImplement dao = new ItemsImplement(DBConnect.getConn());
 			List<Items> item = dao.getNewBooks();
 			for (Items itemlist : item) {
+				System.out.println(itemlist);
 			%>
 
-			<div class="card" id="item<%=itemlist.getId() %>">
+			<div class="card" id="item<%=itemlist.getId()%>">
 				<div class="card-body text-center">
 					<img src="items/<%=itemlist.getItemimg()%>" alt="Card image"
-						class="img-thumbnail ">
+						class="img-thumbnail" style="width: 200px; height: 200px;">
 					<p class="card-text"><%=itemlist.getName()%></p>
 					<p class="card-text">
-						~by<%=itemlist.getProduct()%></p>
+						<span class="text-muted">~by</span> &nbsp;<%=itemlist.getProduct()%></p>
 					<p class="card-text">
 
 						<%=" " + itemlist.getPrice()%></p>
@@ -185,11 +179,14 @@ session.removeAttribute("addCartFailed");
 						<%
 						if (u == null) {
 						%>
-						<a href="login.jsp" class="btn btn-outline-success ">Add to Cart</a>
+						<a href="jsp/login.jsp" class="btn btn-outline-success ">Add
+							to Cart</a>
 						<%
 						} else {
 						%>
-						<a href="addingToCart?itemId=<%=itemlist.getId() %>&&uidfkid=<%=u.getId() %>" class="btn btn-outline-success " >Add to Cart</a>
+						<a href="#" class="btn btn-outline-success"
+							onclick="addToCart(<%=itemlist.getId()%>, <%=u.getId()%>)">Add
+							to Cart</a>
 						<%
 						}
 						%>
