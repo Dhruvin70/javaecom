@@ -4,7 +4,7 @@
 
 	<div class="row">
 		<div class="col-md-5 col-sm-0 col-0 d-flex align-items-center">
-			
+
 		</div>
 		<div class="col-md-5 col-sm-6 col-6 d-flex align-items-center">
 			<h3 class="ms-3 m-2">Company</h3>
@@ -18,7 +18,7 @@
 			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
 			<p class="mb-1 pt-2 fs-4">Welcome,</p>
 			<a href="account.jsp?login"
-				class="text-decoration-none text-dark fs-3 mx-2 "><%=loggedInUser.getFirst()%></a>
+				class="text-decoration-none text-dark fs-3 mx-2 "><%=session.getAttribute("first")%></a>
 			<!-- Add any other information you want to display for the logged-in user -->
 			<a href="WEB-INF/js/register.jsp" class="btn btn-danger m-2"
 				data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Logout</a>
@@ -41,14 +41,14 @@
 		%>
 		<div
 			class="col-md-2 col-sm-6 col-6 p-3 d-flex align-items-center justify-content-end">
-			<a  href="jsp/login.jsp" class="btn btn-outline-primary m-2"
+			<a href="jsp/login.jsp" class="btn btn-outline-primary m-2"
 				style="width: 80px">Login</a> <a href="register.jsp"
 				class="btn btn-outline-success m-2" type="button">Register</a>
 		</div>
 		<%
 		}
 		%>
-		
+
 
 	</div>
 

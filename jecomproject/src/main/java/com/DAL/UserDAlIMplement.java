@@ -2,8 +2,10 @@ package com.DAL;
 
 import com.entity.User;
 
-
 import com.user.servlet.UserLogin;
+
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+import jakarta.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,23 +94,24 @@ public class UserDAlIMplement implements UserDAL {
 			PreparedStatement ps = coon.prepareStatement(userValues);
 			ps.setString(1, email);
 			ps.setString(2, password);
-
 			ResultSet userDetailSet = ps.executeQuery();
 
 			if (userDetailSet.next()) {
-
-				String userFirst = userDetailSet.getString("first");
 				logined = new User();
+				String userFirst = userDetailSet.getString("first");
+
 				logined.setEmail(userDetailSet.getString("email"));
 				logined.setPassword(userDetailSet.getString("password"));
 				logined.setFirst(userFirst);
 				logined.setId(userDetailSet.getInt("id"));
-				
-				
+				logined.setLast(userDetailSet.getString("last"));
+				logined.setAddress(userDetailSet.getString("address"));
+				logined.setPhone(Long.parseLong(userDetailSet.getString("phone")));
+
 				// Print user data to the console
 				System.out.println("User Email: " + logined.getEmail());
 				System.out.println("User Password: " + logined.getPassword());
-
+				System.out.println("User Password: " + logined.getId());
 			}
 			// Close the ResultSet and PreparedStatement
 			userDetailSet.close();
@@ -116,12 +119,13 @@ public class UserDAlIMplement implements UserDAL {
 			coon.close();
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
 		return logined;
 	}
 
-	public static  boolean isStrongPassword(String password) {
+	public static boolean isStrongPassword(String password) {
 		// Define a regular expression for password strength
 		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
@@ -134,6 +138,58 @@ public class UserDAlIMplement implements UserDAL {
 		// Return true if the password matches the pattern (strong password), otherwise
 		// false
 		return matcher.matches();
+	}
+
+	public boolean updateDatabase(String fieldId, String newData, int userId) {
+		boolean updated = false;
+
+		String updateQuery = "UPDATE user SET " + fieldId + " = ? WHERE id = ?";
+
+		try {
+			PreparedStatement ps = coon.prepareStatement(updateQuery);
+			ps.setString(1, newData);
+			ps.setInt(2, userId);
+
+			int x = ps.executeUpdate();
+			if (x == 1) {
+
+				updated = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return updated;
+	}
+
+	public User getUserById(int userId) {
+		User user = null;
+
+		String selectQuery = "SELECT * FROM user WHERE id = ?";
+
+		try {
+			PreparedStatement ps = coon.prepareStatement(selectQuery);
+			ps.setInt(1, userId);
+
+			ResultSet resultSet = ps.executeQuery();
+
+			if (resultSet.next()) {
+				user = new User();
+				user.setEmail(resultSet.getString("email"));
+				user.setFirst(resultSet.getString("first"));
+				user.setId(resultSet.getInt("id"));
+				user.setLast(resultSet.getString("last"));
+				user.setAddress(resultSet.getString("address"));
+				user.setPhone(Long.parseLong(resultSet.getString("phone")));
+				// Set other user attributes as needed
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
 	}
 
 }

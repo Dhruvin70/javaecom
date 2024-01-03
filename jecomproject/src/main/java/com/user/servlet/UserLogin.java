@@ -42,9 +42,19 @@ public class UserLogin extends HttpServlet {
 				else {
 					User loggedInUser = login.userLogin(email, password);
 					if (loggedInUser != null) {
+						User us = new User();
+						req.getSession().setAttribute("email", loggedInUser.getEmail());
+						req.getSession().setAttribute("uid", String.valueOf(loggedInUser.getId()));
+						req.getSession().setAttribute("first", loggedInUser.getFirst());
+						req.getSession().setAttribute("last", loggedInUser.getLast());
+						req.getSession().setAttribute("address", loggedInUser.getAddress());
+						req.getSession().setAttribute("phone", loggedInUser.getPhone());
+
 						// Authentication successful, set the user in the session
 						req.getSession().setAttribute("loggedInUser", loggedInUser);
-
+						System.out.println("-----------------------------------------------------");
+						System.out.println( "At user login.java"+loggedInUser.getId());
+						System.out.println("-----------------------------------------------------");
 						// Redirect to a secure page or perform other actions
 						res.sendRedirect("index.jsp");
 					} else {

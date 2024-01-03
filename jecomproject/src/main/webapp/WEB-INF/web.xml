@@ -71,6 +71,20 @@
         <url-pattern>/removecid</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>UpdateUserProfile</servlet-name>
+        <servlet-class>com.user.servlet.EditUserProfile</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfile</servlet-name>
+        <url-pattern>/editUserProfile</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+   
+    
     
 </web-app>
 </element>
