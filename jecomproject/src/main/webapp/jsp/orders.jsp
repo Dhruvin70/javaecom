@@ -4,6 +4,7 @@
 <%@page import="com.DAL.ItemsImplement"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="com.entity.User"%>
 
 
 
@@ -90,6 +91,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 </script>
 
 </head>
+<%
+	User loggedInUser = (User) session.getAttribute("loggedInUser");
+	if (session.getAttribute("loggedInUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+
+	}
+	%>
 
 <body class="app">
 	<header class="app-header fixed-top">

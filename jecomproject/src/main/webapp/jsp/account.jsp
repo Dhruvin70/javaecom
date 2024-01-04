@@ -1,3 +1,5 @@
+<%@page import="com.entity.User"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +22,14 @@
 <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
 
 </head>
+<%
+	User loggedInUser = (User) session.getAttribute("loggedInUser");
+	if (session.getAttribute("loggedInUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+
+	}
+	%>
 
 <body class="app">
 	<header class="app-header fixed-top">

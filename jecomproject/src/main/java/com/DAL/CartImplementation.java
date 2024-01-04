@@ -46,7 +46,7 @@ public class CartImplementation implements CartDAO {
 	}
 
 	@Override
-	public List<Cart> getBookByUser(int uid) {
+	public List<Cart> getItemByUser(int uid) {
 		List<Cart> cartlist = new ArrayList<Cart>();
 		Cart cartItem = null;
 
@@ -102,5 +102,7 @@ public class CartImplementation implements CartDAO {
 		return deleted;
 		
 	}
+	
+	
 
 }

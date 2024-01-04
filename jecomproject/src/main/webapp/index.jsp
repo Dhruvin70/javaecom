@@ -147,8 +147,8 @@ session.removeAttribute("addCartFailed");
 	<%
 	Connection connection = DBConnect.getConn();
 
-	out.println(connection + "success");
-	%>
+/* 	out.println(connection + "success");
+ */	%>
 
 
 	<%@ include file="commom_components/content.jsp"%>

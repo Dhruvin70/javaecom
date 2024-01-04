@@ -8,7 +8,7 @@ public interface CartDAO {
 	
 	public boolean addCart(Cart c) ;
 	
-	public List<Cart> getBookByUser(int uid);
+	public List<Cart> getItemByUser(int uid);
 	
 	public boolean deleteItembycartid(int cartid , int id);
 
