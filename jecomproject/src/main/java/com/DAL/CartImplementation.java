@@ -103,6 +103,28 @@ public class CartImplementation implements CartDAO {
 		
 	}
 	
-	
+	public boolean removeAllCartItems(int uid) {
+		boolean removed = false;
+		
+		try {
+			
+			String sql = "DELETE FROM cart WHERE id = ?";
+			PreparedStatement ps = coon.prepareStatement(sql);
+			ps.setInt(1, uid);
+			
+			int x = ps.executeUpdate();
+			if (x==1) {
+				removed = true;
+				
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return removed;
+	}
+
 
 }

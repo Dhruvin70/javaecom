@@ -17,7 +17,6 @@ public class OrderImplements implements OrderDAO {
 		super();
 		this.coon = coon;
 
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean addOrderDetails(Order o) {
@@ -49,6 +48,7 @@ public class OrderImplements implements OrderDAO {
 		return added;
 
 	}
+	
 
 	public boolean orderConfirmation(Order o) {
 		boolean confirmed = false;
@@ -69,7 +69,7 @@ public class OrderImplements implements OrderDAO {
 			e.printStackTrace();
 		}
 
-		return false;
+		return confirmed;
 
 	}
 

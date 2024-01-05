@@ -128,12 +128,12 @@
 	<!-- Include the snackbar HTML element where you want it to appear -->
 	<div id="snackbar">Item added to cart!</div>
 
-	
+
 	<%
 // Clear session attributes after use
 session.removeAttribute("addCart");
 session.removeAttribute("addCartFailed");
-%> 
+%>
 
 
 
@@ -147,8 +147,9 @@ session.removeAttribute("addCartFailed");
 	<%
 	Connection connection = DBConnect.getConn();
 
-/* 	out.println(connection + "success");
- */	%>
+	/* 	out.println(connection + "success");
+	 */
+	%>
 
 
 	<%@ include file="commom_components/content.jsp"%>
