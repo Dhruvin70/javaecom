@@ -56,10 +56,9 @@ public class OrderFormDetails extends HttpServlet {
         session.setAttribute("total", ordertotal);
         session.setAttribute("tax", tax);
         session.setAttribute("orderprice", orderprice);
-
-
-        // Set the orderDetail as an attribute for the next JSP page
-        req.setAttribute("orderDetail", orderDetail);
+        
+        
+        session.setAttribute("orderDetail", orderDetail);
         
        
 

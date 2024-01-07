@@ -62,14 +62,14 @@ public class UserLogin extends HttpServlet {
 						System.out.println("Login failed for: " + email);
 						// You might want to redirect to a login page with an error message
 						req.setAttribute("errorMessage", "Invalid email or password");
-						req.getRequestDispatcher("/login.jsp").forward(req, res);
+						res.sendRedirect("jsp/login.jsp");
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				// Log the exception or provide a user-friendly error message
 				req.setAttribute("errorMessage", "An error occurred during login. Please try again later.");
-				req.getRequestDispatcher("/login.jsp").forward(req, res);
+				res.sendRedirect("jsp/login.jsp");
 
 			}
 		} catch (Exception e) {

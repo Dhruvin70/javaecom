@@ -94,6 +94,16 @@
 			<servlet-name>Order</servlet-name>
 			<url-pattern>/order</url-pattern>
 		</servlet-mapping>
+		
+		<servlet>
+			<servlet-name>Authorization</servlet-name>
+			<servlet-class>com.user.servlet.AuthorizePayment.java</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>Authorization</servlet-name>
+			<url-pattern>/authorize</url-pattern>
+		</servlet-mapping>
 
 
 

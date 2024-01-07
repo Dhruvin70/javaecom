@@ -179,7 +179,7 @@
 													<input type="text" id="form3Example2"
 														class="form-control ps-2"
 														value="<%=session.getAttribute("last")%>"
-														required="required" name="orderlast" /> <label
+														 readonly  name="orderlast" /> <label
 														class="form-label ps-2" for="form3Example2">Last
 														name</label>
 												</div>
@@ -205,7 +205,7 @@
 												<input type="email" id="form3Example3"
 													class="form-control ps-2"
 													value="<%=session.getAttribute("email")%>"
-													required="required" name="orderemail" /> <label
+													 readonly  name="orderemail" /> <label
 													class="form-label ps-2" for="form3Example3">Email
 													address</label>
 											</div>
