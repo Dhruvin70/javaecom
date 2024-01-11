@@ -29,8 +29,8 @@ import jakarta.servlet.http.HttpSession;
 
 public class PaymentServices {
 
-	private static final String CLIENT_ID = "AbKjmBOvyL_pvq9036Z6PWqaKgxl2YJ3BofFyE3OHD6MqjD2OKkZb_bXLsfpdgNOamGU4QkO3-dfnOTx";
-	private static final String CLIENT_SECRET = "EAkCSvRDW1fb8sAfAyALoGt2_aJ-_5LsHylupm5Z1ilRBDLLz3vGWJOAOQAdNej5AKQ0NhbabfDUepvg";
+	private static final String CLIENT_ID = "AbKjmBOvyL_pvq9036Z6PWqaKgxl2YJ3BofFyE3OHD6MsfpdgNOamGU4QkO3-dfnOTx";
+	private static final String CLIENT_SECRET = "EAkCSvRDW1fb8sAfAyALoGt2_aJ-_5LsHvGWJOAOQAdNej5AKQ0NhbabfDUepvg";
 	private static final String MODE = "sandbox";
 
 	public String authorizedPayment(Order o, HttpServletRequest req) throws PayPalRESTException {
