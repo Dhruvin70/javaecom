@@ -94,11 +94,7 @@
 								<%
 								double totalprice = 0;
 								for (Cart c : cartitem) {
-
 									totalprice = c.getTotalprice();
-									System.out.println("-----------------------------------------------------------------");
-									System.out.println("at  total: " + totalprice);
-									System.out.println("------------------------------------------------------------------");
 								%>
 								<tr>
 									<th scope="row">
@@ -162,7 +158,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-3">
 
-												<input type="text" value="<%=u.getId() %>"
+												<input type="hidden" value="<%=u.getId() %>"
 													name="orderuid">
 
 

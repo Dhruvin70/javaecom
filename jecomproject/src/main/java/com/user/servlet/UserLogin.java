@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.DAL.UserDAlIMplement;
 import com.DB.DBConnect;
 import com.entity.User;
@@ -40,8 +42,15 @@ public class UserLogin extends HttpServlet {
 				}
 
 				else {
-					User loggedInUser = login.userLogin(email, password);
-					if (loggedInUser != null) {
+					User loggedInUser = login.userLogin(email);
+					System.out.println("--------------------------------------------------------");
+					System.out.println(loggedInUser.getPassword());
+					System.out.println("--------------------------------------------------------");
+
+					boolean hashed = BCrypt.checkpw(password, loggedInUser.getPassword());
+					System.out.println(hashed);
+
+					if (loggedInUser != null && BCrypt.checkpw(password, loggedInUser.getPassword())) {
 						User us = new User();
 						req.getSession().setAttribute("email", loggedInUser.getEmail());
 						req.getSession().setAttribute("uid", String.valueOf(loggedInUser.getId()));
@@ -53,7 +62,7 @@ public class UserLogin extends HttpServlet {
 						// Authentication successful, set the user in the session
 						req.getSession().setAttribute("loggedInUser", loggedInUser);
 						System.out.println("-----------------------------------------------------");
-						System.out.println( "At user login.java"+loggedInUser.getId());
+						System.out.println("At user login.java" + loggedInUser.getId());
 						System.out.println("-----------------------------------------------------");
 						// Redirect to a secure page or perform other actions
 						res.sendRedirect("index.jsp");

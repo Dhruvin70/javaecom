@@ -72,21 +72,20 @@ public class ItemsImplement implements ItemsDAO {
 			while (set.next()) {
 				i = new Items();
 
-				i.setName(set.getString(1));
-				i.setProduct_code(set.getString(3));
-				i.setProduct(set.getString(2));
+				i.setName(set.getString(3));
+				i.setProduct_code(set.getString(2));
+				i.setProduct(set.getString(5));
 				double priceDouble = set.getDouble(4);
 				i.setPrice(String.valueOf(priceDouble));
-				i.setStatus(set.getString(5));
+				i.setStatus(set.getString(7));
 				i.setItemimg(set.getString(6));
-				i.setId(set.getInt(7));
+				i.setId(set.getInt(1));
 				list.add(i);
 
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			e.printStackTrace();		}
 
 		return list;
 	}
@@ -130,7 +129,6 @@ public class ItemsImplement implements ItemsDAO {
 
 		try {
 
-//			String sqlFile = "SELECT file_name FROM  `dmaven`.`admin_add_items` WHERE product_code=?";
 			String sqlUpdate = "UPDATE `dmaven`.`admin_add_items` SET name=?,product=?,product_code=?,price=?,status=? WHERE id=?";
 
 			PreparedStatement ps1 = coon.prepareStatement(sqlUpdate);
@@ -138,10 +136,10 @@ public class ItemsImplement implements ItemsDAO {
 			ps1.setString(1, id.getName());
 			ps1.setString(2, id.getProduct());
 			ps1.setString(3, id.getProduct_code());
-
 			ps1.setDouble(4, Double.parseDouble(id.getPrice()));
 			ps1.setString(5, id.getStatus());
 			ps1.setInt(6, id.getId());
+			
 
 			int x = ps1.executeUpdate();
 
@@ -151,7 +149,6 @@ public class ItemsImplement implements ItemsDAO {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -183,9 +180,7 @@ public class ItemsImplement implements ItemsDAO {
 				psRecreate.executeUpdate();
 				deleted = true;
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+		} catch (Exception e) {			e.printStackTrace();
 		}
 		return deleted;
 	}
@@ -194,38 +189,36 @@ public class ItemsImplement implements ItemsDAO {
 	public List<Items> getNewBooks() {
 
 		List<Items> list = new ArrayList<Items>();
-		Items item = null; 
+		Items item = null;
 		try {
-			
-		
-		String sql = "SELECT * FROM admin_add_items WHERE status=? ORDER BY id DESC";
-		PreparedStatement ps = coon.prepareStatement(sql);
-		ps.setString(1,"Active");
-		
-		ResultSet rs  = ps.executeQuery();
-		int i = 0;
-		while(rs.next() && i<=4) {
-			item = new Items();
-			item.setName(rs.getString("name"));
-			item.setProduct(rs.getString("product"));
-			item.setProduct_code(rs.getString("product_code"));
-			double priceDouble = rs.getDouble("price");
-			item.setPrice(String.valueOf(priceDouble));
-			item.setStatus(rs.getString("status"));
-			item.setItemimg(rs.getString("file_name"));
-			item.setId(rs.getInt("id"));
-			list.add(item);
-			i++;
-			
-		}
-		
+
+			String sql = "SELECT * FROM admin_add_items WHERE status=? ORDER BY id DESC";
+			PreparedStatement ps = coon.prepareStatement(sql);
+			ps.setString(1, "Active");
+
+			ResultSet rs = ps.executeQuery();
+			int i = 0;
+			while (rs.next() && i <= 4) {
+				item = new Items();
+				item.setName(rs.getString("name"));
+				item.setProduct(rs.getString("product"));
+				item.setProduct_code(rs.getString("product_code"));
+				double priceDouble = rs.getDouble("price");
+				item.setPrice(String.valueOf(priceDouble));
+				item.setStatus(rs.getString("status"));
+				item.setItemimg(rs.getString("file_name"));
+				item.setId(rs.getInt("id"));
+				list.add(item);
+				i++;
+
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 
 	}
 
-	
 }

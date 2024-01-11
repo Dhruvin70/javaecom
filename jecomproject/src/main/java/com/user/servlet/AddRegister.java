@@ -16,100 +16,86 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "userRegister", urlPatterns = { "/register" })
 public class AddRegister extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
-        try {
+		try {
 
-            // Getting request from the client
-            String first = req.getParameter("first");
-            String last = req.getParameter("last");
-            String country = req.getParameter("countryCode");
-            long phone = Long.parseLong(req.getParameter("phone"));
-            String companyname = req.getParameter("companyname");
-            String address = req.getParameter("address");
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
-            
-            if(UserDAlIMplement.isStrongPassword(password)) {
-            	String pmessage = "Passwords not strong";
-                req.setAttribute("message", pmessage);
-                res.sendRedirect("register.jsp");
-                return;
-            }
-            
-           
-            
-            String hashedpassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
-            HttpSession session = req.getSession();
+			// Getting request from the client
+			String first = req.getParameter("first");
+			String last = req.getParameter("last");
+			String country = req.getParameter("countryCode");
+			long phone = Long.parseLong(req.getParameter("phone"));
+			String companyname = req.getParameter("companyname");
+			String address = req.getParameter("address");
+			String email = req.getParameter("email");
+			String password = req.getParameter("password");
+			
+			String hashedpassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+			HttpSession session = req.getSession();
 
-            // Printing in the console for debugging purpose
-            System.out.println("First Name: " + first);
-            System.out.println("Last Name: " + last);
-            System.out.println("Country Code: " + country);
-            System.out.println("Phone: " + phone);
-            System.out.println("Company Name: " + companyname);
-            System.out.println("Address: " + address);
-            System.out.println("Email: " + email);
-            System.out.println("Password: " + password);
-            System.out.println("Hashed: "+hashedpassword);
+			if (UserDAlIMplement.isStrongPassword(password)) {
+				String pmessage = "Passwords not strong";  
+				req.setAttribute("message", pmessage);
+				res.sendRedirect("register.jsp");
+				return;
+			}
 
-            // Data connection object
-            UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
-            if(DBConnect.getConn()==null) {
-            	String message = "Connection error";
-                session.setAttribute("message", message);
-                res.sendRedirect("register.jsp");
-                return;
-            }
+			UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
+			if (DBConnect.getConn() == null) {
+				String message = "Connection error";
+				session.setAttribute("message", message);
+				res.sendRedirect("register.jsp");
+				return;
+			}
 
-            if (dal.isUserExists(email)) {
-                String message = "Account with this email already registered";
-                session.setAttribute("message", message);
-                res.sendRedirect("register.jsp");
-                return;
-            }
+			if (dal.isUserExists(email)) {
+				String message = "Account with this email already registered";
+				session.setAttribute("message", message);
+				res.sendRedirect("register.jsp");
+				return;
+			}
 
-            // Password equality check
-            if (!req.getParameter("password").equals(req.getParameter("repassword"))) {
-                String message = "Passwords do not match";
-                session.setAttribute("message", message);
-                res.sendRedirect("register.jsp");                
-                return;
-            }
+			// Password equality check
+			if (!req.getParameter("password").equals(req.getParameter("repassword"))) {
+				String message = "Passwords do not match";
+				session.setAttribute("message", message);
+				res.sendRedirect("register.jsp");
+				return;
+			}
 
-            // Created object of User class to implement the data to the database through
-            // userRegistration class
-            User userObj = new User();
-            userObj.setFirst(first);
-            userObj.setLast(last);
-            userObj.setCountry(country);
-            userObj.setPhone(phone);
-            userObj.setCompanyName(companyname);
-            userObj.setAddress(address);
-            userObj.setEmail(email);
-            userObj.setPassword(password);
+			// Created object of User class to implement the data to the database through
+			// userRegistration class
+			User userObj = new User();
+			userObj.setFirst(first);
+			userObj.setLast(last);
+			userObj.setCountry(country);
+			userObj.setPhone(phone);
+			userObj.setCompanyName(companyname);
+			userObj.setAddress(address);
+			userObj.setEmail(email);
+			userObj.setPassword(hashedpassword);
+			
 
-            // Message with data implementation status
-            boolean success = dal.userRegistration(userObj);
-            if (success) {
-                // Registration successful, set success message
-                String successMessage = "Registration successful. Redirecting to login page...";
-                session.setAttribute("successMessage", successMessage);
-           
-                // Forward to register.jsp to display the success message
-                res.sendRedirect("jsp/login.jsp");
-                }
-            	else {
-                // Registration failed, set failure message
-                String message = "Registration failed. Please try again.";
-                session.setAttribute("message", message);
-                res.sendRedirect("register.jsp");
-                return;
-            }
+			// Message with data implementation status
+			boolean success = dal.userRegistration(userObj);
+			if (success) {
+				// Registration successful, set success message
+				String successMessage = "Registration successful. Redirecting to login page...";
+				session.setAttribute("successMessage", successMessage);	
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+				// Forward to register.jsp to display the success message
+				res.sendRedirect("jsp/login.jsp");
+			} else {
+				// Registration failed, set failure message
+				String message = "Registration failed. Please try again.";
+				session.setAttribute("message", message);
+				res.sendRedirect("register.jsp");
+				return;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

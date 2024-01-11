@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 @WebServlet(name = "AdminAddItems", urlPatterns = { "/adminAddItems" })
-@MultipartConfig
+@MultipartConfig   //for data such as file or images
 public class AdminAddItems extends HttpServlet {
 
 	@Override
@@ -39,9 +39,6 @@ public class AdminAddItems extends HttpServlet {
 
 			HttpSession session = req.getSession();
 
-			
-
-
 			ItemsImplement ii = new ItemsImplement(DBConnect.getConn());
 			Items item = new Items();
 			item.setItemimg(imgFileName);
@@ -50,9 +47,8 @@ public class AdminAddItems extends HttpServlet {
 			item.setPrice(price);
 			item.setProduct_code(product_code);
 			item.setStatus(itemStatus);
-			
-			System.out.println(item);
 
+			System.out.println(item);
 
 			boolean implemented = ii.itemInsertion(item);
 
@@ -68,13 +64,11 @@ public class AdminAddItems extends HttpServlet {
 
 				String successMsg = "Item Added Successfully.\n" + item;
 				session.setAttribute("smessage", successMsg);
-//				req.getRequestDispatcher("admin/add_item.jsp").forward(req, res);
 				res.sendRedirect("admin/add_item.jsp");
 				return;
 			} else {
 				String failureMsg = "Unable to add item something went wrong";
 				session.setAttribute("fmessage", failureMsg);
-//				req.getRequestDispatcher("admin/add_item.jsp").forward(req, res);
 				res.sendRedirect("admin/add_item.jsp");
 				return;
 			}

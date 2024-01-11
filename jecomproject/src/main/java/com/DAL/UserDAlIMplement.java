@@ -2,7 +2,6 @@ package com.DAL;
 
 import com.entity.User;
 
-
 import com.user.servlet.UserLogin;
 
 import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -85,14 +84,13 @@ public class UserDAlIMplement implements UserDAL {
 	}
 
 	@Override
-	public User userLogin(String email, String password) {
+	public User userLogin(String email) {
 		User logined = null;
 		try {
-			String userValues = "SELECT * FROM user WHERE email=? and password=?";
+			String userValues = "SELECT * FROM user WHERE email=? ";
 
 			PreparedStatement ps = coon.prepareStatement(userValues);
 			ps.setString(1, email);
-			ps.setString(2, password);
 			ResultSet userDetailSet = ps.executeQuery();
 
 			if (userDetailSet.next()) {
@@ -112,13 +110,13 @@ public class UserDAlIMplement implements UserDAL {
 				System.out.println("User Password: " + logined.getPassword());
 				System.out.println("User Password: " + logined.getId());
 			}
+
 			// Close the ResultSet and PreparedStatement
 			userDetailSet.close();
 			ps.close();
 			coon.close();
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
 		return logined;

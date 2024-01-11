@@ -1,4 +1,4 @@
-package com.user.servlet;
+ package com.user.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -25,7 +25,7 @@ public class DeleteItemFromCart extends HttpServlet{
 			int cid = Integer.parseInt(req.getParameter("cid"));
 			int uid = Integer.parseInt(req.getParameter("uid"));
 			
-			System.out.println("At deletion wuth cid and uid: " + cid + " "+ uid);
+			System.out.println("At deletion wuth cid and uid: " + cid + " " + uid);
 			
 			CartImplementation dao = new CartImplementation(DBConnect.getConn());
 			boolean deleted = dao.deleteItembycartid(cid,uid);

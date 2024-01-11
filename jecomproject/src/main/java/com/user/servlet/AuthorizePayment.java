@@ -10,39 +10,36 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import org.bouncycastle.ocsp.Req;
-
 import com.entity.Order;
-import com.paypal.api.payments.Payment;
-
-
-/**
- * Servlet implementation class AuthorizePayment
- */
 
 @WebServlet(name = "Authorization", urlPatterns = { "/authorize" })
 public class AuthorizePayment extends HttpServlet {
-	private static final long serialVersionUID = 1L;    
-    
+	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public AuthorizePayment() {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
-		Order orderDetail = (Order) session.getAttribute("orderdetails");
-		
+		Order orderDetail = (Order) session.getAttribute("orderDetail");
+
 		try {
-			
+
 			PaymentServices paymentServices = new PaymentServices();
 			String approvalLink = paymentServices.authorizedPayment(orderDetail, request);
-			
+
+			System.out.println(approvalLink);
+
 			response.sendRedirect(approvalLink);
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-			
-		
+
 	}
 
 }
