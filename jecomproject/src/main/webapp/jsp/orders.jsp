@@ -1,3 +1,5 @@
+<%@page import="com.entity.Order"%>
+<%@page import="com.DAL.OrderImplements"%>
 <%@page import="com.entity.Items"%>
 <%@page import="java.util.List"%>
 <%@page import="com.DB.DBConnect"%>
@@ -476,8 +478,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 											</tr>
 										</thead>
 										<tbody>
+										
+										<%	OrderImplements dao = new OrderImplements(DBConnect.getConn());
+											List<Order> orders = dao.getAllOrders(loggedInUser.getId());
+											for (Order order : orders) {
+											%>
 											<tr>
-												<td class="cell">#15346</td>
+												<td class="cell"><%=order.getOrder_id() %></td>
 												<td class="cell"><span class="truncate">xyz@gmail.com</span></td>
 												<td class="cell">+1 CAD</td>
 												<td class="cell">9904499044</td>
@@ -490,6 +497,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 												<td class="cell"><a class="btn-sm app-btn-secondary"
 													href="#">Invoice</a></td>
 											</tr>
+											<%
+											}
+											%>
 											<tr>
 												<td class="cell">#15346</td>
 												<td class="cell"><span class="truncate">xyz@gmail.com</span></td>

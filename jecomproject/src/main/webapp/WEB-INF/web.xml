@@ -94,7 +94,7 @@
 			<servlet-name>Order</servlet-name>
 			<url-pattern>/order</url-pattern>
 		</servlet-mapping>
-		
+
 		<servlet>
 			<servlet-name>Authorization</servlet-name>
 			<servlet-class>com.user.servlet.AuthorizePayment.java</servlet-class>
@@ -105,6 +105,26 @@
 			<url-pattern>/authorize</url-pattern>
 		</servlet-mapping>
 
+
+		<servlet>
+			<servlet-name>ReviewPayment</servlet-name>
+			<servlet-class>com.user.servlet.ReviewPayment</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>ReviewPayment</servlet-name>
+			<url-pattern>/review_payment</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+			<servlet-name>ExecutePayment</servlet-name>
+			<servlet-class>com.user.servlet.ExecutePayment</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>ExecutePayment</servlet-name>
+			<url-pattern>/execute_payment</url-pattern>
+		</servlet-mapping>
 
 
 

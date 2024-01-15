@@ -1,36 +1,27 @@
 package com.user.servlet;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.SessionFactory;
 
 import com.entity.Order;
 import com.paypal.api.payments.Amount;
 import com.paypal.api.payments.Details;
-import com.paypal.api.payments.Item;
-import com.paypal.api.payments.ItemList;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.PaymentExecution;
 import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class PaymentServices {
 
-	private static final String CLIENT_ID = "AbKjmBOvyL_pvq9036Z6PWqaKgxl2YJ3BofFyE3OHD6MsfpdgNOamGU4QkO3-dfnOTx";
-	private static final String CLIENT_SECRET = "EAkCSvRDW1fb8sAfAyALoGt2_aJ-_5LsHvGWJOAOQAdNej5AKQ0NhbabfDUepvg";
+	private static final String CLIENT_ID = "6PWqaKgxl2YJ3BofFyE3OHD6MqjD2OKkZb_bXLsfpdgNOamGU4QkO3-dfnOTx";
+	private static final String CLIENT_SECRET = "EAkCSvRDW1fbz3vGWJOAOQAdNej5AKQ0NhbabfDUepvg";
 	private static final String MODE = "sandbox";
 
 	public String authorizedPayment(Order o, HttpServletRequest req) throws PayPalRESTException {
@@ -66,6 +57,18 @@ public class PaymentServices {
 	public Payment getPaymentDetails(String paymentId) throws PayPalRESTException {
 		APIContext apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
 		return Payment.get(apiContext, paymentId);
+	}
+	
+	public Payment executePayment(String paymentId , String PayerId) throws PayPalRESTException {
+		
+		PaymentExecution execution = new PaymentExecution();
+		execution.setPayerId(PayerId);
+		 Payment payment = new Payment().setId(paymentId);
+		 
+		 APIContext api = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+		 
+		 return payment.execute(api, execution);
+		 
 	}
 
 	private Payer getPayersInfo(HttpServletRequest req) {

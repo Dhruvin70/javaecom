@@ -24,7 +24,7 @@ public class OrderImplements implements OrderDAO {
 
 		try {
 
-			String sql = "INSERT INTO (id,first,last,address,email,phone,total) VALUES (?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO order_details (id,first,last,address,email,phone,total) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement ps = coon.prepareStatement(sql);
 
 			ps.setInt(1, o.getUser_id());
@@ -53,7 +53,7 @@ public class OrderImplements implements OrderDAO {
 	public boolean orderConfirmation(Order o) {
 		boolean confirmed = false;
 		String sql = "INSERT INTO `order_itemdetails` ( id, pid, order_id, total) "
-				+ "SELECT c.id AS id, c.pid AS pid, o.order_id AS order_id , c.total" + "FROM cart c "
+				+ "SELECT c.id AS id, c.pid AS pid, o.order_id AS order_id , o.total " + "FROM cart c "
 				+ "JOIN order_details o ON c.id = o.id";
 
 		try {
