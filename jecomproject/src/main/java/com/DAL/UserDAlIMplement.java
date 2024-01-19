@@ -153,7 +153,6 @@ public class UserDAlIMplement implements UserDAL {
 				updated = true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -187,6 +186,29 @@ public class UserDAlIMplement implements UserDAL {
 		}
 
 		return user;
+	}
+
+	public boolean resetPassword(int uid, String newPassword) {
+		boolean changed = false;
+
+		String changing = "UPDATE user SET password =? WHERE id =? ";
+
+		try {
+			PreparedStatement ps = coon.prepareStatement(changing);
+			ps.setInt(2, uid);
+			ps.setString(1, changing);
+
+			int x = ps.executeUpdate();
+
+			if (x == 1) {
+				changed = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return changed;
 	}
 
 }

@@ -160,7 +160,7 @@
 										<ul class="dropdown-menu"
 											aria-labelledby="user-dropdown-toggle">
 
-											<li><a class="dropdown-item" href="account.jsp">Account</a></li>
+											<li><a class="dropdown-item" href="../jsp/account.jsp">Account</a></li>
 											<!-- 								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
  -->
 											<li><hr class="dropdown-divider"></li>

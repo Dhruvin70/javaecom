@@ -1,6 +1,9 @@
 package com.user.servlet;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -16,6 +19,13 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "userRegister", urlPatterns = { "/register" })
 public class AddRegister extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
@@ -83,9 +93,25 @@ public class AddRegister extends HttpServlet {
 				// Registration successful, set success message
 				String successMessage = "Registration successful. Redirecting to login page...";
 				session.setAttribute("successMessage", successMessage);	
+				
+				
+				scheduler.schedule(new Runnable() {
+				    @Override
+				    public void run() {
+				    	
+				    	try {
+							res.sendRedirect("jsp/login.jsp");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				        // Code to be executed after the delay
+				    }
+				}, 1, TimeUnit.SECONDS); 
+				
 
 				// Forward to register.jsp to display the success message
-				res.sendRedirect("jsp/login.jsp");
+				
 			} else {
 				// Registration failed, set failure message
 				String message = "Registration failed. Please try again.";

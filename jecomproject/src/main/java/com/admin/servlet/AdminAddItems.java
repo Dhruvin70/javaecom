@@ -2,12 +2,8 @@ package com.admin.servlet;
 
 import java.io.File;
 
-import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.file.FileAlreadyExistsException;
-import java.util.List;
 
+import java.io.IOException;
 import com.DAL.ItemsImplement;
 import com.DB.DBConnect;
 import com.entity.Items;
@@ -24,6 +20,9 @@ import jakarta.servlet.http.Part;
 @WebServlet(name = "AdminAddItems", urlPatterns = { "/adminAddItems" })
 @MultipartConfig   //for data such as file or images
 public class AdminAddItems extends HttpServlet {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -74,7 +73,7 @@ public class AdminAddItems extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+		
 			e.printStackTrace();
 		}
 	}

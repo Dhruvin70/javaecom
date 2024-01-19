@@ -1,6 +1,7 @@
 package com.DAL;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,7 +49,6 @@ public class OrderImplements implements OrderDAO {
 		return added;
 
 	}
-	
 
 	public boolean orderConfirmation(Order o) {
 		boolean confirmed = false;
@@ -77,23 +77,29 @@ public class OrderImplements implements OrderDAO {
 		List<Order> orders = new ArrayList<Order>();
 		Order o = null;
 		try {
-			String sql = "SELECT oid.*, od.first,od.last,od.address,od.phone, FROM `order_itemdetails` Join order_ORDER BY `order_itemdetails`.`order_id` ASC ";
+			String sql = "SELECT oid.*, od.first, od.last, od.address, od.phone, od.email FROM `order_details` od JOIN order_itemdetails oid ON od.order_id = oid.order_id ORDER BY od.order_id ASC";
 			PreparedStatement ps = coon.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
-				 o.setAddress("address"); 
-				 o.setDate("date");
-				 o.setFirst("first");
-				 o.setLast("last");
-				 o.setEmail("email");
-				 o.setOrder_id(Integer.parseInt("order_id"));
-				 o.setTotal(Double.parseDouble("total"));
+				o = new Order();
+				o.setAddress(rs.getString("address"));
+				Date date = rs.getDate("date");
+				o.setDate(String.valueOf(date));
+				o.setFirst(rs.getString("first"));
+				o.setLast(rs.getString("last"));
+				o.setEmail(rs.getString("email"));
+				String phonenum = rs.getString("phone");
+				o.setPhone(Long.parseLong(phonenum));
+				String orderid = rs.getString("order_id");
+				o.setOrder_id(Integer.parseInt(orderid));
+				String total = rs.getString("total");
+				o.setTotal(Double.parseDouble(total));
+				orders.add(o);
 			}
-			
-			
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 		return orders;

@@ -72,20 +72,21 @@ public class ItemsImplement implements ItemsDAO {
 			while (set.next()) {
 				i = new Items();
 
-				i.setName(set.getString(3));
-				i.setProduct_code(set.getString(2));
-				i.setProduct(set.getString(5));
-				double priceDouble = set.getDouble(4);
+				i.setName(set.getString(2));
+				i.setProduct_code(set.getString(1));
+				i.setProduct(set.getString(4));
+				double priceDouble = set.getDouble(3);
 				i.setPrice(String.valueOf(priceDouble));
-				i.setStatus(set.getString(7));
-				i.setItemimg(set.getString(6));
-				i.setId(set.getInt(1));
+				i.setStatus(set.getString(6));
+				i.setItemimg(set.getString(5));
+				i.setId(set.getInt(7));
 				list.add(i);
 
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();		}
+			e.printStackTrace();
+		}
 
 		return list;
 	}
@@ -139,7 +140,6 @@ public class ItemsImplement implements ItemsDAO {
 			ps1.setDouble(4, Double.parseDouble(id.getPrice()));
 			ps1.setString(5, id.getStatus());
 			ps1.setInt(6, id.getId());
-			
 
 			int x = ps1.executeUpdate();
 
@@ -180,7 +180,8 @@ public class ItemsImplement implements ItemsDAO {
 				psRecreate.executeUpdate();
 				deleted = true;
 			}
-		} catch (Exception e) {			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return deleted;
 	}

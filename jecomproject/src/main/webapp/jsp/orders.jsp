@@ -35,6 +35,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 
 <!-- FontAwesome JS-->
 <script defer src="../assets/plugins/fontawesome/js/all.min.js"></script>
+<script defer src="../js/orders.js"></script>
 
 <!-- App CSS -->
 <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
@@ -42,65 +43,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 <!-- Dialogbox JS-->
 
 
-<script>
-    function showConfirmation(itemId) {
-        // Use SweetAlert to display a confirmation dialog
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If user clicks 'Yes', call the delete function
-                deleteFunction(itemId);
-            } else {
-                // If user clicks 'No', you can handle it here
-                Swal.fire('Cancelled', 'Your operation is safe :)', 'info');
-            }
-        });
-    }
-
-    function deleteFunction(itemId) {
-        // Use the Fetch API to make an AJAX request
-        fetch('http://localhost:8080/jecomproject/deleteItem?id=' + itemId, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // Add any other headers as needed
-            },
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle the response from the server
-            Swal.fire('Deleted!', data.message, 'success');
-            // Reload the page after deletion
-            location.reload();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle error, display an error message, etc.
-        });
-    }
-</script>
-
 </head>
 <%
-	User loggedInUser = (User) session.getAttribute("loggedInUser");
-	if (session.getAttribute("loggedInUser") == null) {
-		response.sendRedirect("login.jsp");
-		return;
+User loggedInUser = (User) session.getAttribute("loggedInUser");
+if (session.getAttribute("loggedInUser") == null) {
+	response.sendRedirect("login.jsp");
+	return;
 
-	}
-	%>
+}
+%>
 
 <body class="app">
 	<header class="app-header fixed-top">
@@ -144,7 +95,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 									aria-expanded="false"><img src="../assets/images/user.png"
 									alt="user profile"></a>
 								<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-									<li><a class="dropdown-item" href="../account.jsp">Account</a></li>
+									<li><a class="dropdown-item" href="javascript:void(0);" onclick="redirectToAccount('../jsp/account.jsp')">Account</a></li>
 
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" data-bs-toggle="modal"
@@ -167,7 +118,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 			<div class="sidepanel-inner d-flex flex-column">
 				<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 				<div class="app-branding">
-					<a class="app-logo" href="../index.jsp"><img
+					<a class="app-logo" onclick="redirectToAccount('../index.jsp')" href="javascript:void(0);"><img
 						class="logo-icon me-2" src="../assets/images/app-logo.svg"
 						alt="logo"><span class="logo-text">PORTAL</span></a>
 
@@ -178,7 +129,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 
 						<li class="nav-item">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ --> <a
-							class="nav-link" href="adminhome.jsp"> <span class="nav-icon">
+							class="nav-link" href="javascript:void(0);" onclick="redirectToAccount('../jsp/orders.jsp')"> <span class="nav-icon">
 									<svg width="1em" height="1em" viewBox="0 0 16 16"
 										class="bi bi-folder" fill="currentColor"
 										xmlns="http://www.w3.org/2000/svg">
@@ -187,7 +138,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
   <path fill-rule="evenodd"
 											d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z" />
 </svg>
-							</span> </span> <span class="nav-link-text">Orders</span>
+							</span> <span class="nav-link-text">Orders</span>
 						</a> <!--//nav-link-->
 						</li>
 						<!--//nav-item-->
@@ -222,10 +173,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 								<ul class="submenu-list list-unstyled">
 
 									<li class="submenu-item"><a class="submenu-link"
-										href="add_item.jsp">Sell Item</a></li>
+										href="#">Sell Item</a></li>
 
 									<li class="submenu-item"><a class="submenu-link"
-										href="all_items.jsp">Items To Be Sell On Portal</a></li>
+										href="#">Items To Be Sell On Portal</a></li>
 
 
 
@@ -234,7 +185,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 						</li>
 						<li class="nav-item">
 							<!--//Bootstrap Icons: https://icons.getbootstrap.com/ --> <a
-							class="nav-link" href="help.jsp"> <span class="nav-icon">
+							class="nav-link" href="javascript:void(0);" onclick="redirectToAccount('../jsp/help.jsp')"> <span class="nav-icon">
 									<svg width="1em" height="1em" viewBox="0 0 16 16"
 										class="bi bi-question-circle" fill="currentColor"
 										xmlns="http://www.w3.org/2000/svg">
@@ -322,10 +273,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 						id="orders-all-tab" data-bs-toggle="tab" href="#orders-all"
 						role="tab" aria-controls="orders-all" aria-selected="">All
 						Orders</a> <a class="flex-sm-fill text-sm-center nav-link"
-						id="orders-pending-tab" data-bs-toggle="tab"
-						href="#orders-pending" role="tab" aria-controls="orders-pending"
-						aria-selected="false">Pending</a> <a
-						class="flex-sm-fill text-sm-center nav-link"
+						id="order-paid-tab" data-bs-toggle="tab" href="#order-paid"
+						role="tab" aria-controls="order-paid" aria-selected="false">Paid</a>
+					<a class="flex-sm-fill text-sm-center nav-link"
 						id="orders-cancelled-tab" data-bs-toggle="tab"
 						href="#orders-cancelled" role="tab"
 						aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
@@ -342,95 +292,45 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 									<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-												<th class="cell">Order Id</th>
-												<th class="cell">Address</th>
-												<th class="cell">Cost</th>
+												<th class="cell">Order</th>
 												<th class="cell">Email</th>
-												<th class="cell">Status</th>
-												<th class="cell">Action</th>
-
+												<th class="cell">Phone</th>
+												<th class="cell">Customer</th>
+												<th class="cell">Date</th>
+												<th class="cell">Address</th>
+												<th class="cell">Total</th>
+												<th class="cell"></th>
 											</tr>
 										</thead>
-
-										<%-- Check for success message --%>
-										<%
-										if (session.getAttribute("deletionsmessage") != null) {
-										%>
-										<p class="text-sm-center text-success pt-3 pb-3"
-											style="border: solid green; border-width: 2px 2px 2px 2px;"
-											data-bs-toggle="tab">
-											<%=session.getAttribute("deletionsmessage")%>
-										</p>
-										<%
-										session.removeAttribute("deletionsmessage");
-										%>
-										<%
-										}
-										%>
-
-
-										<%-- Check for failure message --%>
-										<%
-										if (session.getAttribute("deletionfmessage") != null) {
-										%>
-										<p class="text-sm-center text-danger pt-3 pb-3"
-											style="border: solid red; border-width: 2px 2px 2px 2px;"
-											data-bs-toggle="tab">
-											<%=session.getAttribute("deletionfmessage")%>
-										</p>
-										<%
-										session.removeAttribute("deletionfmessage");
-										%>
-										<%
-										}
-										%>
-
-
 										<tbody>
-
-											<%
-											ItemsImplement itemImplement = new ItemsImplement(DBConnect.getConn());
-											List<Items> list = itemImplement.getAllItems();
-											for (Items item : list) {
-											%>
-
 											<tr>
-												<td class="cell" id="routeId_<%=item.getId()%>" hidden
-													value="<%=item.getId()%>"><%=item.getId()%></td>
-
-												<td class="cell"><%=item.getName()%></td>
-												<td class="cell"><span class="truncate"><img
-														alt="" src="../items/<%=item.getItemimg()%>"
-														style="width: 100px; height: 100px"></span></td>
-												<td class="cell"><%=item.getProduct_code()%></td>
-												<td class="cell"><span><%=item.getPrice()%></span> <!--  <span> class="note">2:16
-														PM</span>--></td>
-												<td class="cell">
-													<%
-													if ("Active".equals(item.getStatus())) {
-													%> <span class="badge bg-success p-1 ps-2 pe-2"
-													style="font-size: 14px;">Active</span> <%
- } else {
- %> <span class="badge bg-danger p-1 ps-2 pe-2 "
-													style="font-size: 14px;">Inactive</span> <%
- }
- %>
-												</td>
-												<td class="cell"><a
-													href="../admin/editItem.jsp?id=<%=item.getId()%>"
-													class="btn btn-sm btn-primary p-1 ps-2 pe-2"><i
-														class="fas fa-edit me-1"></i>Edit</a> <a href="#"
-													class="btn btn-sm btn-danger  p-1 ps-2 pe-2"
-													onclick="showConfirmation('<%=item.getId()%>')"><i
-														class="fas fa-trash-alt me-1"></i>Delete</a> <!-- onclick="showConfirmation('<%=item.getId()%>')"-->
-												</td>
-												</td>
-
+												<%
+												System.out.println("_____________________________--------------------------------------------------");
+												OrderImplements dao = new OrderImplements(DBConnect.getConn());
+												List<Order> orders = dao.getAllOrders(loggedInUser.getId());
+												System.out.println("_____________________________--------------------"+orders+"------------------------------");
+												for (Order order : orders) {
+												
+												
+												
+												%>
+											
+											<tr>
+												<td class="cell"><%=order.getOrder_id()%></td>
+												<td class="cell"><span class="truncate"> <%=order.getEmail()%>
+												</span></td>
+												<td class="cell"><%=order.getPhone()%></td>
+												<td class="cell"><%=order.getFirst() + " " + order.getLast()%></td>
+												<td class="cell"><span><%=order.getDate()%></span></td>
+												<td class="cell"><%=order.getAddress()%></td>
+												<td class="cell"><%=order.getTotal()%></td>
+												<td class="cell"><a class="btn-sm app-btn-secondary"
+													href="#">Invoice</a></td>
 											</tr>
 											<%
-											System.out.print(item);
 											}
 											%>
+											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -454,83 +354,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 						<!--//app-pagination-->
 
 					</div>
-					<!--//tab-pane-->
 
-					<div class="tab-pane fade" id="orders-paid" role="tabpanel"
-						aria-labelledby="orders-paid-tab">
+					<div class="tab-pane fade" id="order-paid" role="tabpanel"
+						aria-labelledby="order-paid-tab">
 						<div class="app-card app-card-orders-table mb-5">
 							<div class="app-card-body">
 								<div class="table-responsive">
-
 									<table class="table mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Order</th>
-												<th class="cell">Email</th>
-												<th class="cell">Country code</th>
-												<th class="cell">Phone</th>
-												<th class="cell">Customer</th>
-												<th class="cell">Date</th>
-												<th class="cell">Address</th>
-												<th class="cell">Status</th>
-												<th class="cell">Total</th>
-												<th class="cell"></th>
-											</tr>
-										</thead>
-										<tbody>
 										
-										<%	OrderImplements dao = new OrderImplements(DBConnect.getConn());
-											List<Order> orders = dao.getAllOrders(loggedInUser.getId());
-											for (Order order : orders) {
-											%>
-											<tr>
-												<td class="cell"><%=order.getOrder_id() %></td>
-												<td class="cell"><span class="truncate">xyz@gmail.com</span></td>
-												<td class="cell">+1 CAD</td>
-												<td class="cell">9904499044</td>
-												<td class="cell">John Sanders</td>
-												<td class="cell"><span>17 Oct</span><span class="note">2:16
-														PM</span></td>
-												<td class="cell">Nobody Knows, Toronto, ON M4J ***</td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$259.35</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary"
-													href="#">Invoice</a></td>
-											</tr>
-											<%
-											}
-											%>
-											<tr>
-												<td class="cell">#15346</td>
-												<td class="cell"><span class="truncate">xyz@gmail.com</span></td>
-												<td class="cell">+1 CAD</td>
-												<td class="cell">9904499044</td>
-												<td class="cell">John Sanders</td>
-												<td class="cell"><span>17 Oct</span><span class="note">2:16
-														PM</span></td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$259.35</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary"
-													href="#">View</a></td>
-											</tr>
-											<tr>
-												<td class="cell">#15346</td>
-												<td class="cell"><span class="truncate">xyz@gmail.com</span></td>
-												<td class="cell">+1 CAD</td>
-												<td class="cell">9904499044</td>
-												<td class="cell">John Sanders</td>
-												<td class="cell"><span>17 Oct</span><span class="note">2:16
-														PM</span></td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$259.35</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary"
-													href="#">View</a></td>
-											</tr>
-
-
-
-
-										</tbody>
 									</table>
 								</div>
 								<!--//table-responsive-->
@@ -540,9 +371,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 						<!--//app-card-->
 					</div>
 					<!--//tab-pane-->
-
-					<div class="tab-pane fade" id="orders-pending" role="tabpanel"
-						aria-labelledby="orders-pending-tab">
+					<div class="tab-pane fade" id="orders-cancelled" role="tabpanel"
+						aria-labelledby="orders-cancelled-tab">
 						<div class="app-card app-card-orders-table mb-5">
 							<div class="app-card-body">
 								<div class="table-responsive">
@@ -559,82 +389,42 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css
 											</tr>
 										</thead>
 										<tbody>
+
 											<tr>
-												<td class="cell">#15345</td>
-												<td class="cell"><span class="truncate">Consectetur
-														adipiscing elit</span></td>
-												<td class="cell">Dylan Ambrose</td>
-												<td class="cell"><span class="cell-data">16 Oct</span><span
-													class="note">03:16 AM</span></td>
-												<td class="cell"><span class="badge bg-warning">Pending</span></td>
-												<td class="cell">$96.20</td>
+												<td class="cell">#15342</td>
+												<td class="cell"><span class="truncate">Justo
+														feugiat neque</span></td>
+												<td class="cell">Reina Brooks</td>
+												<td class="cell"><span class="cell-data">12 Oct</span><span
+													class="note">04:23 PM</span></td>
+												<td class="cell"><span class="badge bg-danger">Cancelled</span></td>
+												<td class="cell">$59.00</td>
 												<td class="cell"><a class="btn-sm app-btn-secondary"
 													href="#">View</a></td>
 											</tr>
+
 										</tbody>
 									</table>
+								</div>
+								<!--//table-responsive-->
+							</div>
+							<!--//app-card-body-->
+						</div>
+						<!--//app-card-->
+					</div>
+					<!--//tab-pane-->
 				</div>
-				<!--//table-responsive-->
+				<!--//tab-content-->
+
+
+
 			</div>
-			<!--//app-card-body-->
+			<!--//container-fluid-->
 		</div>
-		<!--//app-card-->
-	</div>
-	<!--//tab-pane-->
-	<div class="tab-pane fade" id="orders-cancelled" role="tabpanel"
-		aria-labelledby="orders-cancelled-tab">
-		<div class="app-card app-card-orders-table mb-5">
-			<div class="app-card-body">
-				<div class="table-responsive">
-					<table class="table mb-0 text-left">
-						<thead>
-							<tr>
-								<th class="cell">Order</th>
-								<th class="cell">Product</th>
-								<th class="cell">Customer</th>
-								<th class="cell">Date</th>
-								<th class="cell">Status</th>
-								<th class="cell">Total</th>
-								<th class="cell"></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td class="cell">#15342</td>
-								<td class="cell"><span class="truncate">Justo
-										feugiat neque</span></td>
-								<td class="cell">Reina Brooks</td>
-								<td class="cell"><span class="cell-data">12 Oct</span><span
-									class="note">04:23 PM</span></td>
-								<td class="cell"><span class="badge bg-danger">Cancelled</span></td>
-								<td class="cell">$59.00</td>
-								<td class="cell"><a class="btn-sm app-btn-secondary"
-									href="#">View</a></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-				<!--//table-responsive-->
-			</div>
-			<!--//app-card-body-->
-		</div>
-		<!--//app-card-->
-	</div>
-	<!--//tab-pane-->
-	</div>
-	<!--//tab-content-->
+		<!--//app-content-->
 
 
-
-	</div>
-	<!--//container-fluid-->
-	</div>
-	<!--//app-content-->
-
-
-	<!--//app-footer-->
+		<!--//app-footer-->
 
 	</div>
 	<!--//app-wrapper-->

@@ -20,12 +20,14 @@ import jakarta.servlet.http.HttpSession;
 
 public class UserLogin extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		try {
 
 			UserDAlIMplement login = new UserDAlIMplement(DBConnect.getConn());
-			HttpSession session = req.getSession();
+			req.getSession();
 
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
@@ -43,10 +45,6 @@ public class UserLogin extends HttpServlet {
 
 				else {
 					User loggedInUser = login.userLogin(email);
-					System.out.println("--------------------------------------------------------");
-					System.out.println(loggedInUser.getPassword());
-					System.out.println("--------------------------------------------------------");
-
 					boolean hashed = BCrypt.checkpw(password, loggedInUser.getPassword());
 					System.out.println(hashed);
 
@@ -71,6 +69,7 @@ public class UserLogin extends HttpServlet {
 						System.out.println("Login failed for: " + email);
 						// You might want to redirect to a login page with an error message
 						req.setAttribute("errorMessage", "Invalid email or password");
+						wait();
 						res.sendRedirect("jsp/login.jsp");
 					}
 				}
