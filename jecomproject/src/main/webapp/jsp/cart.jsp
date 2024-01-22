@@ -21,7 +21,7 @@
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/cart.css">
+<link rel="stylesheet" type="text/css" href="../css/cart.css">
 
 </head>
 <body>

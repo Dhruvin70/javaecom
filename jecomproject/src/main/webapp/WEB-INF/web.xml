@@ -125,6 +125,17 @@
 			<servlet-name>ExecutePayment</servlet-name>
 			<url-pattern>/execute_payment</url-pattern>
 		</servlet-mapping>
+		
+		
+		<servlet>
+			<servlet-name>Verification</servlet-name>
+			<servlet-class>com.user.servlet.CodeVerification</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>Verification</servlet-name>
+			<url-pattern>/otp-verification</url-pattern>
+		</servlet-mapping>
 
 
 

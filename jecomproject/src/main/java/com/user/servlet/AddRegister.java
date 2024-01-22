@@ -9,6 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import com.DAL.UserDAlIMplement;
 import com.DB.DBConnect;
+import com.entity.Mailer;
 import com.entity.User;
 
 import jakarta.servlet.annotation.WebServlet;
@@ -86,9 +87,28 @@ public class AddRegister extends HttpServlet {
 			userObj.setEmail(email);
 			userObj.setPassword(hashedpassword);
 			
+			
+			Mailer otp = new Mailer();
+			 String otp_gen = otp.generateOTP();
+			 otp.sendOTPEmail(email, otp_gen);
+			
+			
+			res.sendRedirect("jsp/otp-verification.jsp");
+			
+			
 
-			// Message with data implementation status
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}	
+	
+}	/*// Message with data implementation status
 			boolean success = dal.userRegistration(userObj);
+			
+			
+			
+			
+			
 			if (success) {
 				// Registration successful, set success message
 				String successMessage = "Registration successful. Redirecting to login page...";
@@ -122,6 +142,6 @@ public class AddRegister extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-}
+		}*/
+	
+
