@@ -26,7 +26,6 @@ public class AddRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
@@ -51,8 +50,9 @@ public class AddRegister extends HttpServlet {
 				res.sendRedirect("register.jsp");
 				return;
 			}
-
+			
 			UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
+
 			if (DBConnect.getConn() == null) {
 				String message = "Connection error";
 				session.setAttribute("message", message);
@@ -86,13 +86,12 @@ public class AddRegister extends HttpServlet {
 			userObj.setAddress(address);
 			userObj.setEmail(email);
 			userObj.setPassword(hashedpassword);
-			
-			
+											
 			Mailer otp = new Mailer();
-			 String otp_gen = otp.generateOTP();
-			 otp.sendOTPEmail(email, otp_gen);
-			
-			
+			String otp_gen = otp.generateOTP();
+			otp.sendOTPEmail(email, otp_gen);
+			session.setAttribute("otp", otp_gen);
+			session.setAttribute("user", userObj);
 			res.sendRedirect("jsp/otp-verification.jsp");
 			
 			
@@ -102,46 +101,5 @@ public class AddRegister extends HttpServlet {
 		}
 	}	
 	
-}	/*// Message with data implementation status
-			boolean success = dal.userRegistration(userObj);
-			
-			
-			
-			
-			
-			if (success) {
-				// Registration successful, set success message
-				String successMessage = "Registration successful. Redirecting to login page...";
-				session.setAttribute("successMessage", successMessage);	
-				
-				
-				scheduler.schedule(new Runnable() {
-				    @Override
-				    public void run() {
-				    	
-				    	try {
-							res.sendRedirect("jsp/login.jsp");
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				        // Code to be executed after the delay
-				    }
-				}, 1, TimeUnit.SECONDS); 
-				
-
-				// Forward to register.jsp to display the success message
-				
-			} else {
-				// Registration failed, set failure message
-				String message = "Registration failed. Please try again.";
-				session.setAttribute("message", message);
-				res.sendRedirect("register.jsp");
-				return;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-	
+}	
 

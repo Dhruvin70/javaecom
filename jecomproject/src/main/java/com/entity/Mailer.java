@@ -29,10 +29,10 @@ public class Mailer {
 		// Setup properties for the SMTP server
 		Properties properties = new Properties();
 
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.ssl.enable", "true");
+	    properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587"); // Use port 587 with TLS
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
 
 		// Anonymous class
 

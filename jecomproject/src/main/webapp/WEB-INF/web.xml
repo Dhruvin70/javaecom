@@ -125,8 +125,8 @@
 			<servlet-name>ExecutePayment</servlet-name>
 			<url-pattern>/execute_payment</url-pattern>
 		</servlet-mapping>
-		
-		
+
+
 		<servlet>
 			<servlet-name>Verification</servlet-name>
 			<servlet-class>com.user.servlet.CodeVerification</servlet-class>
@@ -136,6 +136,28 @@
 			<servlet-name>Verification</servlet-name>
 			<url-pattern>/otp-verification</url-pattern>
 		</servlet-mapping>
+
+		<servlet>
+			<servlet-name>Registered-Email</servlet-name>
+			<servlet-class>com.user.servlet.Emailverification</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>Registered-Email</servlet-name>
+			<url-pattern>/regemail</url-pattern>
+		</servlet-mapping>
+		
+			<servlet>
+			<servlet-name>ResetNewPassword</servlet-name>
+			<servlet-class>com.user.servlet.NewPassword</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>ResetNewPassword</servlet-name>
+			<url-pattern>//reset-newpassword</url-pattern>
+		</servlet-mapping>
+		
+
 
 
 

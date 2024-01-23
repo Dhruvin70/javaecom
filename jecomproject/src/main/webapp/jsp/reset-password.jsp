@@ -4,15 +4,12 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Reset Password</title>
     <meta charset="ISO-8859-1">
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
     <link rel="shortcut icon" href="favicon.ico"> 
     
     <!-- FontAwesome JS-->
@@ -35,7 +32,7 @@
 	
 					<div class="auth-form-container text-left">
 						
-						<form class="auth-form resetpass-form">                
+						<form class="auth-form resetpass-form" action="../regemail?resetpassword" method="post">                
 							<div class="email mb-3">
 								<label class="sr-only" for="reg-email">Your Email</label>
 								<input id="reg-email" name="reg-email" type="email" class="form-control login-email" placeholder="Your Email" required="required">

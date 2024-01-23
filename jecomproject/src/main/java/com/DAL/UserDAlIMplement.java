@@ -188,15 +188,15 @@ public class UserDAlIMplement implements UserDAL {
 		return user;
 	}
 
-	public boolean resetPassword(int uid, String newPassword) {
+	public boolean resetPassword(String email, String newPassword) {
 		boolean changed = false;
 
-		String changing = "UPDATE user SET password =? WHERE id =? ";
+		String changing = "UPDATE user SET password =? WHERE email =? ";
 
 		try {
 			PreparedStatement ps = coon.prepareStatement(changing);
-			ps.setInt(2, uid);
-			ps.setString(1, changing);
+			ps.setString(2, email);
+			ps.setString(1, newPassword);
 
 			int x = ps.executeUpdate();
 

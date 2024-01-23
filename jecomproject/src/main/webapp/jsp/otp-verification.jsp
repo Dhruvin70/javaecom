@@ -68,18 +68,28 @@
       </clipPath>
     </defs>
   </svg>
-  <form action="../otp-verification" method="post">  
-		<div class="title">Verification Code</div>
-		<p>We have sent a verification code to your mobile number</p>
-		<div id='inputs'>
-			<input id='input1' name="input1" type='text' maxLength="1" /> <input id='input2' name="input2"
-				type='text' maxLength="1" /> <input id='input3' type='text' name="input3"
-				maxLength="1" /> <input id='input4' type='text' maxLength="1"  name="input4" /> <input name="input5"
-				id='input5' type='text' maxLength="1" /> <input id='input6' name="input6"
-				type='text' maxLength="1" />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
+		<form action="../otp-verification" method="post">
+			<div class="title">Verification Code</div>
+			<p>We have sent a verification code to your mobile number</p>
+
+			<div id='inputs'>
+				<input id='input1' required="required" name="input1" type='text'
+					maxLength="1" /> <input id='input2' required="required"
+					name="input2" type='text' maxLength="1" /> <input id='input3'
+					required="required" type='text' name="input3" maxLength="1" /> <input
+					id='input4' type='text' required="required" maxLength="1"
+					name="input4" /> <input name="input5" required="required"
+					id='input5' type='text' maxLength="1" /> <input id='input6'
+					name="input6" required="required" type='text' maxLength="1" />
+			</div>
+			<%
+			
+			if(session.getAttribute("otpmsg") != null){ %>
+			<p class="mt-2"><%=session.getAttribute("otpmsg") %></p>
+			<%} %>
+			<button type="submit">Submit</button>
+			<%session.removeAttribute("otpmsg"); %>
+		</form>
 	</section>
 
 </body>

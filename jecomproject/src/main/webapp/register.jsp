@@ -621,7 +621,7 @@ session.removeAttribute("successMessage");
 
 											<p
 												class="col-md-8 justify-content-center mx-auto text-left text-muted mt-2 mb-3 mb-lg-4">
-												Have already an account? <a href="login.jsp"
+												Have already an account? <a href="jsp/login.jsp"
 													class="fw-bold text-body"><u>Login here</u></a>
 											</p>
 
