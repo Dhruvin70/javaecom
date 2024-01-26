@@ -92,6 +92,7 @@ public class AddRegister extends HttpServlet {
 			otp.sendOTPEmail(email, otp_gen);
 			session.setAttribute("otp", otp_gen);
 			session.setAttribute("user", userObj);
+			session.setAttribute("/req-reg", "/req-reg");
 			res.sendRedirect("jsp/otp-verification.jsp");
 			
 			

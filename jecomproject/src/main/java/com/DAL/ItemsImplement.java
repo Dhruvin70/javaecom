@@ -1,21 +1,12 @@
 package com.DAL;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.DB.DBConnect;
 import com.entity.Items;
-
-import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpSession;
-
-import java.sql.PreparedStatement;
 
 public class ItemsImplement implements ItemsDAO {
 
@@ -72,14 +63,14 @@ public class ItemsImplement implements ItemsDAO {
 			while (set.next()) {
 				i = new Items();
 
-				i.setName(set.getString(2));
-				i.setProduct_code(set.getString(1));
-				i.setProduct(set.getString(4));
-				double priceDouble = set.getDouble(3);
+				i.setName(set.getString("name"));
+				i.setProduct_code(set.getString("product_code"));
+				i.setProduct(set.getString("product"));
+				double priceDouble = set.getDouble("price");
 				i.setPrice(String.valueOf(priceDouble));
-				i.setStatus(set.getString(6));
-				i.setItemimg(set.getString(5));
-				i.setId(set.getInt(7));
+				i.setStatus(set.getString("status"));
+				i.setItemimg(set.getString("file_name"));
+				i.setId(set.getInt("id"));
 				list.add(i);
 
 			}

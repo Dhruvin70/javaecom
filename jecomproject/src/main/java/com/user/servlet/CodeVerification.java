@@ -39,7 +39,8 @@ public class CodeVerification extends HttpServlet {
 
 		int concated = Integer.parseInt(input1 + input2 + input3 + input4 + input5 + input6);
 		HttpSession session = request.getSession();
-		String requestURL = (String) session.getAttribute("/req-email");
+		String requestURL = (String) session.getAttribute("/req-reg");
+		String requestNewpass = (String) session.getAttribute("/req-email");
 		System.out.println(requestURL);
 
 		try {
@@ -49,7 +50,7 @@ public class CodeVerification extends HttpServlet {
 
 			if (storedOTP != null && Integer.parseInt(storedOTP) == concated) {
 				session.removeAttribute("otp");
-				if (!requestURL.equals("/req-email")) {
+				if (requestURL.equals("/req-reg")) {
 					UserDAlIMplement dal = new UserDAlIMplement(DBConnect.getConn());
 					boolean success = dal.userRegistration(usr);
 					if (success) {
@@ -66,7 +67,7 @@ public class CodeVerification extends HttpServlet {
 						response.sendRedirect("jsp/register.jsp");
 						return;
 					}
-				} else if (requestURL.equals("/req-email")) {
+				} else if (requestNewpass.equals("/req-email")) {
 					
 					response.setStatus(HttpServletResponse.SC_OK);
 					response.sendRedirect("jsp/newpassword.jsp");
