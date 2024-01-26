@@ -24,7 +24,7 @@ public class Mailer {
 	public void sendOTPEmail(String toEmail, String otp) {
 
 		final String fromEmail = "dhruvingadhiya49@gmail.com";
-		final String password = "bsve kmcj zbwn jcbv";
+		final String password = "";
 
 		// Setup properties for the SMTP server
 		Properties properties = new Properties();
