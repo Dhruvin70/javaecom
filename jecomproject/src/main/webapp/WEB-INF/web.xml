@@ -146,17 +146,28 @@
 			<servlet-name>Registered-Email</servlet-name>
 			<url-pattern>/regemail</url-pattern>
 		</servlet-mapping>
-		
-			<servlet>
+
+		<servlet>
 			<servlet-name>ResetNewPassword</servlet-name>
 			<servlet-class>com.user.servlet.NewPassword</servlet-class>
 		</servlet>
 
 		<servlet-mapping>
 			<servlet-name>ResetNewPassword</servlet-name>
-			<url-pattern>//reset-newpassword</url-pattern>
+			<url-pattern>/reset-newpassword</url-pattern>
 		</servlet-mapping>
-		
+
+		<servlet>
+			<servlet-name>Search</servlet-name>
+			<servlet-class>com.user.servlet.SearchBookServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>Search</servlet-name>
+			<url-pattern>/search</url-pattern>
+		</servlet-mapping>
+
+
 
 
 

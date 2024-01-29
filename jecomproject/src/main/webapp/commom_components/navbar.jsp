@@ -1,8 +1,9 @@
 <%@ page import="com.entity.User"%>
-<div class="container-fluid" style=" position: sticky; top: 0; z-index: 2 ;">
+<div class="container-fluid"
+	style="position: sticky; top: 0; z-index: 2;">
 	<div class="row">
-		<nav   class="navbar col-md-12 navbar-expand-sm navbar-dark"
-			style="backgroung-colour:rgba(0, 0, 0, 0.5); ">
+		<nav class="navbar col-md-12 navbar-expand-sm navbar-dark"
+			style="backgroung-colour: rgba(0, 0, 0, 0.5);">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#"><i
 					class="fa-solid fa-house ms-3"></i></a>
@@ -38,13 +39,14 @@
 						if (session.getAttribute("loggedInUser") != null) {
 						%>
 						<li class="nav-item"><a class="nav-link" href="jsp/cart.jsp"><i
-								class="fa-solid fa-solid fa-cart-shopping fa-flip-horizontal me-1"></i>My Cart</a></li>
+								class="fa-solid fa-solid fa-cart-shopping fa-flip-horizontal me-1"></i>My
+								Cart</a></li>
 
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
 						<!-- on if user is logined -->
-						<a href="jsp/account.jsp" style="text-decoration:none;">
-							<button class="btn btn-light my-2 my-sm-0"  type="button">
+						<a href="jsp/account.jsp" style="text-decoration: none;">
+							<button class="btn btn-light my-2 my-sm-0" type="button">
 								<i class="fa-solid fa-gear me-2"></i>My Account
 							</button>
 						</a> <a href="jsp/help.jsp">
@@ -57,14 +59,14 @@
 					} else {
 					%>
 					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						
-						</a> <a href="jsp/help.jsp">
+				
+
+						 <a href="jsp/help.jsp">
 							<button class="btn btn-light my-2 my-sm-0" type="button">
 								<i class="fa-solid fa-headset me-2"></i>Contact Us
 							</button>
 						</a>
-					</form>
+				
 					<%
 					}
 					%>
@@ -77,9 +79,9 @@
 <div class="container-fluid" style="background-color: black;">
 	<div class="row">
 		<div class="col p-3">
-			<form class="d-flex mx-auto">
-				<input class="form-control me-4" type="search" placeholder="Search"
-					aria-label="Search">
+			<form action="../search" method="post" class="d-flex mx-auto">
+				<input class="form-control me-4" name="ch" type="search"
+					placeholder="Search" aria-label="Search">
 				<button class="btn btn-success " type="submit">Search</button>
 			</form>
 		</div>

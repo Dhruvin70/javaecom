@@ -17,4 +17,6 @@ public interface ItemsDAO {
 	
 	public List<Items> getNewBooks();
 	
+	public List<Items> getItemsBySearch(String ch);
+	
 }

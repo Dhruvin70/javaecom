@@ -212,5 +212,41 @@ public class ItemsImplement implements ItemsDAO {
 		return list;
 
 	}
+	
+	@Override
+	public List<Items> getItemsBySearch(String ch){
+		List<Items> list = new ArrayList<Items>();
+		Items item = null;
+		try {
+
+			String sql = "SELECT * FROM admin_add_items WHERE name like ? or  product like ? and status='Active' ";
+			PreparedStatement ps = coon.prepareStatement(sql);
+			ps.setString(1, "%"+ch+"%");
+			ps.setString(2, "%"+ch+"%");
+
+
+			ResultSet rs = ps.executeQuery();
+			int i = 0;
+			while (rs.next() && i <= 4) {
+				item = new Items();
+				item.setName(rs.getString("name"));
+				item.setProduct(rs.getString("product"));
+				item.setProduct_code(rs.getString("product_code"));
+				double priceDouble = rs.getDouble("price");
+				item.setPrice(String.valueOf(priceDouble));
+				item.setStatus(rs.getString("status"));
+				item.setItemimg(rs.getString("file_name"));
+				item.setId(rs.getInt("id"));
+				list.add(item);
+				i++;
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 }

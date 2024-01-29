@@ -130,10 +130,10 @@
 
 
 	<%
-// Clear session attributes after use
-session.removeAttribute("addCart");
-session.removeAttribute("addCartFailed");
-%>
+	// Clear session attributes after use
+	session.removeAttribute("addCart");
+	session.removeAttribute("addCartFailed");
+	%>
 
 
 
@@ -149,6 +149,69 @@ session.removeAttribute("addCartFailed");
 
 	/* 	out.println(connection + "success");
 	 */
+	%>
+	
+	<%
+	
+	session.getAttribute("search");
+	String value =request.getParameter("ch");
+	
+	%>
+	
+	<%if(session.getAttribute("search") != null){ %>
+
+	<div class="container">
+		<h3 class="text-center p-4">New Arts</h3>
+		<div class="card-container">
+			<%
+			ItemsImplement dao1 = new ItemsImplement(DBConnect.getConn());
+			List<Items> item1 = dao1.getItemsBySearch(value);
+			for (Items itemlist : item1) {
+				System.out.println(itemlist);
+			%>
+
+			<div class="card" id="item<%=itemlist.getId()%>">
+				<div class="card-body text-center">
+					<img src="items/<%=itemlist.getItemimg()%>" alt="Card image"
+						class="img-thumbnail" style="width: 200px; height: 200px;">
+					<p class="card-text"><%=itemlist.getName()%></p>
+					<p class="card-text">
+						<span class="text-muted">~by</span> &nbsp;<%=itemlist.getProduct()%></p>
+					<p class="card-text">
+
+						<%=" " + itemlist.getPrice()%></p>
+					<div class="btn-container">
+						<%
+						if (u == null) {
+						%>
+						<a href="jsp/login.jsp" class="btn btn-outline-success ">Add
+							to Cart</a>
+						<%
+						} else {
+						%>
+						<a href="#" class="btn btn-outline-success"
+							onclick="addToCart(<%=itemlist.getId()%>, <%=u.getId()%>)">Add
+							to Cart</a>
+						<%
+						}
+						%>
+
+
+					</div>
+				</div>
+			</div>
+			<%
+			}
+			%>
+		</div>
+
+		<div class="text-center p-2">
+			<a href="#" class="btn btn-danger btn text-white mt-5 mb-4"
+				style="width: 100px;">View All</a>
+		</div>
+	</div>
+	<%
+	}
 	%>
 
 
@@ -214,9 +277,8 @@ session.removeAttribute("addCartFailed");
 		<div class="card-container">
 			<div class="card">
 				<div class="card-body text-center">
-					<img
-						src="images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg"
-						alt="Card image" class="img-thumbnail">
+					<img src="images/7o7oncwi.png" alt="Card image"
+						class="img-thumbnail">
 					<p class="card-text">Code</p>
 					<p class="card-text">Item</p>
 					<p class="card-text">Categories: Company</p>
@@ -228,9 +290,8 @@ session.removeAttribute("addCartFailed");
 			<!-- Add more cards as needed -->
 			<div class="card">
 				<div class="card-body text-center">
-					<img
-						src="images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg"
-						alt="Card image" class="img-thumbnail">
+					<img src="images/7o7oncwi.png" alt="Card image"
+						class="img-thumbnail">
 					<p class="card-text">Code</p>
 					<p class="card-text">Item</p>
 					<p class="card-text">Categories: Company</p>
@@ -242,9 +303,8 @@ session.removeAttribute("addCartFailed");
 			<!-- Add more cards as needed -->
 			<div class="card">
 				<div class="card-body text-center">
-					<img
-						src="images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg"
-						alt="Card image" class="img-thumbnail">
+					<img src="images/7o7oncwi.png" alt="Card image"
+						class="img-thumbnail">
 					<p class="card-text">Code</p>
 					<p class="card-text">Item</p>
 					<p class="card-text">Categories: Company</p>
@@ -256,9 +316,8 @@ session.removeAttribute("addCartFailed");
 			<!-- Add more cards as needed -->
 			<div class="card">
 				<div class="card-body text-center">
-					<img
-						src="images/CLP3-E9457-ACHSE-SHAFT-AXE-FOR-AGFA-D.LAB_-300x300.jpg"
-						alt="Card image" class="img-thumbnail ">
+					<img src="images/7o7oncwi.png" alt="Card image"
+						class="img-thumbnail ">
 					<p class="card-text">Code</p>
 					<p class="card-text">Item</p>
 					<p class="card-text">Categories: Company</p>

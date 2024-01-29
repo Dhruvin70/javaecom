@@ -15,7 +15,9 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(name = "Order", urlPatterns = { "/order" })
 public class OrderFormDetails extends HttpServlet {
 
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	
     	String orderuserid = req.getParameter("orderuid");
